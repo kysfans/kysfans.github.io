@@ -45,7 +45,7 @@
         content="2023-06-06">
       <meta 
         property="og:article:modified_time" 
-        content="2023-06-06">
+        content="2023-07-13">
       <meta 
         property="og:article:author" 
         content="Frederic_kys">
@@ -286,7 +286,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>2</span>
+    <span>3</span>
     <span>文章</span>
   </a>
   <a 
@@ -450,17 +450,17 @@ exit	//離開CMD
 新建class 
 </code></pre>
 <p>(3.5)寫程式 HelloWorld</p>
-<pre><code>Public class Main&#123;
+<pre><code>Public class HelloWorld&#123;
     # idea 快捷書寫：main
     Public static void main (string[]args)
     # idea 快捷書寫：sout
     System.out.printin(“hello world”)
 &#125;
 </code></pre>
-<p>(4) JAVA語言介紹<br>(4.1) JAVA簡介<br>(4.1.1) 何為程式設計<br>程式設計就是讓電腦為解決某個問題而使用某種程式設計語言編寫程式碼，並最終得到結果的過程。<br>為了使電腦能夠理解人的意圖，人類就必須要將需解決的問題的思路、方法、和手段通過電腦能夠理解的形式告訴電腦，使得電腦能夠根據人的指令一步一步去工作，完成某種特定的任務。這種人和電腦之間交流的過程就是程式設計。</p>
+<p>(4) JAVA語言介紹<br>(4.1) JAVA簡介<br>(4.1.1) 何為程式設計<br>程式設計就是讓電腦為解決某個問題而使用某種程式設計語言編寫程式碼，並最終得到結果的過程。為了使電腦能夠理解人的意圖，人類就必須要將需解決的問題的思路、方法、和手段通過電腦能夠理解的形式告訴電腦，使得電腦能夠根據人的指令一步一步去工作，完成某種特定的任務。這種人和電腦之間交流的過程就是程式設計。</p>
 <p>(4.1.2) 什麼是Java<br>Java是一門物件導向程式設計語言。不僅吸收了C++語言的各種優點，還摒棄了C++裡難以理解的多繼承、指標等概念，因此Java語言具有功能強大和簡單易用兩個特徵。Java語言作為靜態物件導向程式設計語言的代表，極好地實現了物件導向理論，允許程式師以優雅的思維方式進行複雜的程式設計 。</p>
 <p>(4.2) JAVA體系<br>Java分為三個體系：<br>1，Java SE（J2SE，Java 2 Platform Standard Edition，標準版）<br>Java SE 以前稱為 J2SE。它允許開發和部署在桌面、伺服器、嵌入式環境和即時環境中使用的 Java 應用程式。Java SE 包含了支援 Java Web 服務開發的類，並為Java EE和Java ME提供基礎。</p>
-<p>2，ava EE（J2EE，Java 2 Platform Enterprise Edition，企業版）<br>Java EE 以前稱為 J2EE。企業版本幫助開發和部署可移植、健壯、可伸縮且安全的伺服器端Java 應用程式。Java EE 是在 Java SE 的基礎上構建的，它提供 Web 服務、元件模型、管理和通信 API，可以用來實現企業級的面向服務體系結構（service-oriented architecture，SOA）和 Web2.0應用程式。2018年2月，Eclipse 宣佈正式將 JavaEE 更名為 JakartaEE</p>
+<p>2，Java EE（J2EE，Java 2 Platform Enterprise Edition，企業版）<br>Java EE 以前稱為 J2EE。企業版本幫助開發和部署可移植、健壯、可伸縮且安全的伺服器端Java 應用程式。Java EE 是在 Java SE 的基礎上構建的，它提供 Web 服務、元件模型、管理和通信 API，可以用來實現企業級的面向服務體系結構（service-oriented architecture，SOA）和 Web2.0應用程式。2018年2月，Eclipse 宣佈正式將 JavaEE 更名為 JakartaEE</p>
 <p>3，Java ME（J2ME，Java 2 Platform Micro Edition，微型版）<br>Java ME 以前稱為 J2ME。Java ME 為在移動設備和嵌入式設備（比如手機、PDA、電視機上盒和印表機）上運行的應用程式提供一個健壯且靈活的環境。Java ME 包括靈活的使用者介面、健壯的安全模型、許多內置的網路通訊協定以及對可以動態下載的連網和離線應用程式的豐富支援。基於 Java ME 規範的應用程式只需編寫一次，就可以用於許多設備，而且可以利用每個設備的本機功能。<br> <br>(4.3)JVM、JRE 與 JDK<br>JDK是JAVA開發套件，有：<br>1，	JVM虛擬機器：JAVA程式運行的地方Java Virtual Machine是Java虛擬機器，Java程式需要運行在虛擬機器上，不同的平臺有自己的虛擬機器，因此Java語言可以實現跨平臺。</p>
 <p>2，	核心類庫：預先寫好，可以直接調用的JAVA類<br>3，開發工具：Javac編譯工具, Java運行工具, Jdb調試工具, Jhat 記憶體分析工具等等。</p>
 <p>JVM、JRE和JDK的關係<br>JVM<br>Java Virtual Machine是Java虛擬機器，Java程式需要運行在虛擬機器上，不同的平臺有自己的虛擬機器，因此Java語言可以實現跨平臺。<br>JRE<br>Java Runtime Environment包括Java虛擬機器和Java程式所需的核心類庫等。核心類庫主要是java.lang包：包含了運行Java程式必不可少的系統類，如基底資料型別、基本數學函數、字串處理、執行緒、異常處理類等，系統缺省載入這個包<br>如果想要運行一個開發好的Java程式，電腦中只需要安裝JRE即可。<br>JDK<br>Java Development Kit是提供給Java開發人員使用的，其中包含了Java的開發工具，也包括了JRE。所以安裝了JDK，就無需再單獨安裝JRE了。其中的開發工具：編譯工具(javac.exe)，打包工具(jar.exe)等</p>
@@ -511,18 +511,30 @@ exit	//離開CMD
   
     <div class="nav-item-prev">
       <a 
-        href="/2023/06/06/Java%20%E5%9F%BA%E6%9C%AC%E8%AA%9E%E6%B3%95/" 
+        href="/2023/07/29/%E5%B8%B8%E7%94%A8CMD%E5%91%BD%E4%BB%A4/" 
         class="nav-link">
         <i class="iconfont icon-left nav-prev-icon"></i>
         <div>
           <div class="nav-label">上一篇</div>
           
-            <div class="nav-title">Java 基本語法 </div>
-          
         </div>
       </a>
     </div>
   
+  
+    <div class="nav-item-next">
+      <a 
+        href="/2023/06/06/Java%20%E5%9F%BA%E6%9C%AC%E8%AA%9E%E6%B3%95/" 
+        class="nav-link">
+        <div>
+          <div class="nav-label">下一篇</div>
+          
+            <div class="nav-title">Java 基本語法 </div>
+          
+        </div>
+        <i class="iconfont icon-right nav-next-icon"></i>
+      </a>
+    </div>
   
 </div>
 
@@ -564,13 +576,18 @@ exit	//離開CMD
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2023-06-06</div>
-        <a href="/2023/06/06/Java%20%E5%9F%BA%E6%9C%AC%E8%AA%9E%E6%B3%95/"><div class="recent-posts-item-content">Java 基本語法</div></a>
+        <div class="recent-posts-item-title">2023-07-29</div>
+        <a href="/2023/07/29/%E5%B8%B8%E7%94%A8CMD%E5%91%BD%E4%BB%A4/"><div class="recent-posts-item-content"></div></a>
       </div>
     
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2023-06-06</div>
         <a href="/2023/06/06/Java%20%E4%BB%8B%E7%B4%B9/"><div class="recent-posts-item-content">Java 介紹</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-06-06</div>
+        <a href="/2023/06/06/Java%20%E5%9F%BA%E6%9C%AC%E8%AA%9E%E6%B3%95/"><div class="recent-posts-item-content">Java 基本語法</div></a>
       </div>
     
   </div>
