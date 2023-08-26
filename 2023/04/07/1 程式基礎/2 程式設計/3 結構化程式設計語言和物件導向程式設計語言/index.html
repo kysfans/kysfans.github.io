@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+  <meta charset="UTF-8">
+  <meta 
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta 
+    http-equiv="X-UA-Compatible" 
+    content="ie=edge">
+  <meta 
+    name="theme-color" 
+    content="#fff" 
+    id="theme-color">
+  <meta 
+    name="description" 
+    content="Hexo">
+  <link 
+    rel="icon" 
+    href="https://img.songhn.com/img/Y67gdd.png">
+  <title>結構化程式設計語言和物件導向程式設計語言</title>
+  
+    
+      <meta 
+        property="og:title" 
+        content="結構化程式設計語言和物件導向程式設計語言">
+    
+    
+      <meta 
+        property="og:url" 
+        content="http://example.com/2023/04/07/1%20%E7%A8%8B%E5%BC%8F%E5%9F%BA%E7%A4%8E/2%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88/3%20%E7%B5%90%E6%A7%8B%E5%8C%96%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E8%AA%9E%E8%A8%80%E5%92%8C%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E8%AA%9E%E8%A8%80/index.html">
+    
+    
+      <meta 
+        property="og:img" 
+        content="/img/profile.png">
+    
+    
+    
+      <meta 
+        property="og:type" 
+        content="article">
+      <meta 
+        property="og:article:published_time" 
+        content="2023-04-07">
+      <meta 
+        property="og:article:modified_time" 
+        content="2023-08-23">
+      <meta 
+        property="og:article:author" 
+        content="Frederic_Ng">
+      
+        
+      
+    
+  
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  <link rel="preload" href="/css/main.css" as="style" >
+  
+  <link rel="modulepreload" href="//instant.page/5.1.0">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+  
+  
+  
+    <link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+  
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+    function loadCSS(href, data, attr) {
+      var sheet = document.createElement('link');
+      sheet.ref = 'stylesheet';
+      sheet.href = href;
+      sheet.dataset[data] = attr;
+      document.head.appendChild(sheet);
+    }
+    function changeCSS(cssFile, data, attr) {
+      var oldlink = document.querySelector(data);
+      var newlink = document.createElement("link");
+      newlink.setAttribute("rel", "stylesheet");
+      newlink.setAttribute("href", cssFile);
+      newlink.dataset.prism = attr;
+      document.head.replaceChild(newlink, oldlink);
+    }
+  </script>
+  
+    
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+  </script>
+  
+    <script>
+      var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+        document.getElementById('theme-color').dataset.mode = getCssMediaQuery();
+      }
+    };
+    setDarkmode();
+    </script>
+  
+  
+  
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+    <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <div class="wrapper">
+       
+      <nav class="navbar">
+  <div class="navbar-logo">
+    <a class="navbar-logo-main" href="/">
+      
+        <img 
+          class="navbar-logo-img"
+          width="32"
+          height="32"
+          src="https://img.songhn.com/img/Y67gdd.png" 
+          alt="blog logo">
+      
+      <span class="navbar-logo-dsc">Frederic的技術學習筆記</span>
+      </a>
+  </div>
+  <div class="navbar-menu">
+    
+      <a 
+        href="/" 
+        class="navbar-menu-item">
+        
+          首頁
+        
+      </a>
+    
+      <a 
+        href="/archives" 
+        class="navbar-menu-item">
+        
+          存檔
+        
+      </a>
+    
+      <a 
+        href="/tags" 
+        class="navbar-menu-item">
+        
+          標籤
+        
+      </a>
+    
+      <a 
+        href="/categories" 
+        class="navbar-menu-item">
+        
+          分類
+        
+      </a>
+    
+      <a 
+        href="/about" 
+        class="navbar-menu-item">
+        
+          關於
+        
+      </a>
+    
+      <a 
+        href="/links" 
+        class="navbar-menu-item">
+        
+          友鏈
+        
+      </a>
+    
+    <button 
+      class="navbar-menu-item darknavbar navbar-menu-btn" 
+      aria-label="Toggle dark mode"
+      id="dark">
+      <i class="iconfont icon-weather"></i>
+    </button>
+    <button 
+      class="navbar-menu-item searchnavbar navbar-menu-btn" 
+      aria-label="Toggle search"
+      id="search">
+      <!-- <i 
+        class="iconfont icon-search" 
+        style="font-size: 1.2rem; font-weight: 400;">
+      </i> -->
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+        class="iconify iconify--ion" width="28" height="28" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512">
+        <path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="28"
+          d="M256 80a176 176 0 1 0 176 176A176 176 0 0 0 256 80Z"></path>
+        <path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="28"
+          d="M232 160a72 72 0 1 0 72 72a72 72 0 0 0-72-72Z"></path>
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="28"
+          d="M283.64 283.64L336 336"></path>
+      </svg>
+    </button>
+  </div>
+</nav> 
+      
+      <div 
+        id="local-search" 
+        style="display: none">
+        <input
+          class="navbar-menu-item"
+          id="search-input"
+          placeholder="请输入搜索内容..." />
+        <div id="search-content"></div>
+      </div>
+      
+      <div class="section-wrap">
+        <div class="container">
+          <div class="columns">
+            <aside class="left-column">
+              
+              <div class="card card-author">
+                
+  <img 
+    src="/img/profile.png" 
+    class="author-img"
+    width="88"
+    height="88"
+    alt="author avatar">
+
+<p class="author-name">Frederic_Ng</p>
+<p class="author-description">立志成為軟體工程師的文科生</p>
+<div class="author-message">
+  <a 
+    class="author-posts-count" 
+    href="/archives">
+    <span>177</span>
+    <span>文章</span>
+  </a>
+  <a 
+    class="author-categories-count" 
+    href="/categories">
+    <span>10</span>
+    <span>分類</span>
+  </a>
+  <a 
+    class="author-tags-count" 
+    href="/tags">
+    <span>22</span>
+    <span>標籤</span>
+  </a>
+</div>
+
+  <div class="author-card-society">
+    
+      <div class="author-card-society-icon">
+        <a target="_blank" rel="noopener" href="https://github.com/kysfans">
+          <i class="iconfont icon-github society-icon"></i>
+        </a>
+      </div>
+    
+  </div>
+
+              </div>
+               <div class="sticky-tablet">
+  
+  
+    <article class="display-when-two-columns spacer">
+      <div class="card card-content toc-card">
+        <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目錄
+</div>
+
+      </div>
+    </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header">
+    <i 
+      class="iconfont icon-fenlei" 
+      style="padding-right: 2px;">
+    </i>分類
+  </div>
+  <div class="categories-list">
+    
+      <a href="/categories/%E7%A8%8B%E5%BA%8F%E8%A8%AD%E8%A8%88/">
+        <div class="categories-list-item">
+          程序設計
+          <span class="categories-list-item-badge">6</span>
+        </div>
+      </a>
+    
+      <a href="/categories/CMD/">
+        <div class="categories-list-item">
+          CMD
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E6%95%B8%E6%93%9A%E5%BA%AB/">
+        <div class="categories-list-item">
+          數據庫
+          <span class="categories-list-item-badge">9</span>
+        </div>
+      </a>
+    
+      <a href="/categories/JAVA%E7%B0%A1%E4%BB%8B/">
+        <div class="categories-list-item">
+          JAVA簡介
+          <span class="categories-list-item-badge">9</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Spring-%E6%A1%86%E6%9E%B6/">
+        <div class="categories-list-item">
+          Spring-框架
+          <span class="categories-list-item-badge">9</span>
+        </div>
+      </a>
+    
+      <a href="/categories/JAVA%E5%9F%BA%E6%9C%AC%E8%AA%9E%E6%B3%95/">
+        <div class="categories-list-item">
+          JAVA基本語法
+          <span class="categories-list-item-badge">23</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Java%E5%9F%BA%E6%9C%AC%E8%AA%9E%E6%B3%95/">
+        <div class="categories-list-item">
+          Java基本語法
+          <span class="categories-list-item-badge">22</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Java%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91/">
+        <div class="categories-list-item">
+          Java物件導向
+          <span class="categories-list-item-badge">24</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Java%E5%85%B6%E4%BB%96%E6%A6%82%E5%BF%B5/">
+        <div class="categories-list-item">
+          Java其他概念
+          <span class="categories-list-item-badge">62</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ORM%E6%A1%86%E6%9E%B6/">
+        <div class="categories-list-item">
+          ORM框架
+          <span class="categories-list-item-badge">12</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header">
+    <i 
+      class="iconfont icon-biaoqian" 
+      style="padding-right: 2px;">
+    </i>熱門標籤
+  </div>
+  <div class="tags-list">
+    
+      <a 
+        href="/tags/%E7%AD%86%E8%A8%98/" 
+        title="筆記">
+        <div class="tags-list-item">筆記</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E9%80%B2%E9%9A%8E/" 
+        title="Java 物件導向進階">
+        <div class="tags-list-item">Java 物件導向進階</div>
+      </a>
+    
+      <a 
+        href="/tags/List/" 
+        title="List">
+        <div class="tags-list-item">List</div>
+      </a>
+    
+      <a 
+        href="/tags/Java%E9%97%9C%E9%8D%B5%E5%AD%97/" 
+        title="Java關鍵字">
+        <div class="tags-list-item">Java關鍵字</div>
+      </a>
+    
+      <a 
+        href="/tags/Java%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/" 
+        title="Java流程控制">
+        <div class="tags-list-item">Java流程控制</div>
+      </a>
+    
+      <a 
+        href="/tags/Set/" 
+        title="Set">
+        <div class="tags-list-item">Set</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-IO/" 
+        title="Java IO">
+        <div class="tags-list-item">Java IO</div>
+      </a>
+    
+      <a 
+        href="/tags/Java%E9%81%8B%E7%AE%97/" 
+        title="Java運算">
+        <div class="tags-list-item">Java運算</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-%E7%95%B0%E5%B8%B8/" 
+        title="Java 異常">
+        <div class="tags-list-item">Java 異常</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E5%9F%BA%E7%A4%8E/" 
+        title="Java 物件導向基礎">
+        <div class="tags-list-item">Java 物件導向基礎</div>
+      </a>
+    
+      <a 
+        href="/tags/Java%E6%96%B9%E6%B3%95/" 
+        title="Java方法">
+        <div class="tags-list-item">Java方法</div>
+      </a>
+    
+      <a 
+        href="/tags/Map/" 
+        title="Map">
+        <div class="tags-list-item">Map</div>
+      </a>
+    
+      <a 
+        href="/tags/Collection/" 
+        title="Collection">
+        <div class="tags-list-item">Collection</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-%E6%B3%9B%E5%9E%8B/" 
+        title="Java 泛型">
+        <div class="tags-list-item">Java 泛型</div>
+      </a>
+    
+      <a 
+        href="/tags/Java%E9%99%A3%E5%88%97/" 
+        title="Java陣列">
+        <div class="tags-list-item">Java陣列</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-%E5%8F%8D%E5%B0%84/" 
+        title="Java 反射">
+        <div class="tags-list-item">Java 反射</div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+            <main class="main-column">
+              
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      結構化程式設計語言和物件導向程式設計語言
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2023-04-07T04:40:51.000Z">
+      <i 
+        class="iconfont icon-calendar" 
+        style="margin-right: 2px;">
+      </i>
+      <span>2023-04-07</span>
+    </time>
+    
+      <span class="dot"></span>
+      
+        <a 
+          href="/categories/%E7%A8%8B%E5%BA%8F%E8%A8%AD%E8%A8%88/" 
+          class="post-meta-link">
+          程序設計
+        </a>
+      
+    
+    
+      <span class="dot"></span>
+      <span>2.4k 個字</span>
+    
+  </div>
+  
+  </header>
+  <div 
+    id="section" 
+    class="post-content">
+    <p>一、結構化程式設計語言</p>
+<p>結構化程式設計語言是一種強調使用結構化的控制流程來編寫程式的程式設計語言。結構化程式設計的核心思想是是使用結構化的控制結構，如序列、選擇和迭代，來建立程式的邏輯結構。</p>
+<p>二、結構化程式設計語言的缺點</p>
+<p>不過，結構化程式設計語言存在一些缺點，如以下所示：</p>
+<p>1，限制較大的程式結構：結構化程式設計語言通常具有固定的控制結構，如序列、選擇和迴圈。這可能限制了某些特定情況下的程式結構和設計。一些問題可能更適合使用其他編程方法來解決。</p>
+<p>2，複雜性處理困難：某些複雜的程式邏輯可能需要多層巢狀的結構，導致程式碼難以閱讀和理解。這在處理龐大的程式時可能尤其明顯。</p>
+<p>3，不足以表達某些模型：一些複雜的概念和模型，如非線性邏輯或並行性，可能難以用傳統的結構化語言完全表達。這些語言可能無法很好地處理某些特殊場景。</p>
+<p>4，程式碼重複：雖然結構化程式設計強調模塊化和重用，但在某些情況下，由於缺乏高度抽象的機制，程式設計人員可能不得不重複撰寫類似的程式碼，導致程式碼冗長。</p>
+<p>5，難以表達部分模糊邏輯：在一些應用中，部分模糊邏輯可能更適合描述一些模糊的概念。結構化程式設計語言在處理這些情況時可能會面臨困難。</p>
+<p>6，難以應對快速變化的需求：當需求快速變化或需要快速原型時，傳統的結構化程式設計可能需要花費更多的時間和工作量。</p>
+<p>總的來說，雖然結構化程式設計語言在一般情況下具有許多優勢，但它們可能無法完全滿足所有情況下的需求。在選擇程式設計方法和語言時，需要根據項目的特點和需求來做出選擇，可能需要考慮到結構化程式設計的限制以及其他編程方法的優勢。這些情況最終導致了物件導向程式設計的出現。</p>
+<p>三、物件導向程式設計</p>
+<p>物件導向程式設計（Object-Oriented Programming，OOP）是一種程式設計方法論，而物件導向程式設計語言則是用於實現這種方法論的程式設計語言。在OOP中，程式被組織成一個個稱為「物件」的單元，每個物件封裝了數據和相關的操作，以模擬現實世界中的實體和它們之間的關係。物件導向程式設計的特點在於可以將程式結構化成模塊化的單元，並通過繼承、封裝和多型等概念來實現程式的模塊化和重用。這種方法可以使程式更易於理解、維護和擴展。比方說，我們有一個汽車類別，並且我們想要儲存每個汽車的品牌、型號和年份。我們就可以使用物件導向的方式來實現這個案例。</p>
+<p>四、物件導向程式設計的優點</p>
+<p>物件導向程式設計提供了許多優點，使其成為現代軟體開發中的主要方法論之一。以下是物件導向程式設計的一些主要優點：</p>
+<p>1，模塊化和重用性： OOP 通過將程式組織成小的、可重用的模塊（物件），可以更容易地管理程式碼。這使得程式碼更具可讀性、可維護性和可擴展性，並且有助於減少程式碼的重複撰寫。</p>
+<p>2，抽象化： OOP 提供了抽象化的概念，允許將真實世界的實體和其相關的屬性和操作模型化為程式中的物件。這使得程式碼更接近人類思維，更容易理解和編寫。</p>
+<p>3，繼承： 繼承是 OOP 中的重要概念，允許建立新的類別（子類別）基於現有的類別（父類別）。這有助於實現程式碼重用，並在子類別中添加或修改功能，同時保留父類別的特性。</p>
+<p>4，封裝： 封裝是將數據和相關的操作封裝在物件內部的概念。這使得物件的內部實現細節對外部程式碼隱藏起來，提高了程式碼的安全性和可維護性。</p>
+<p>5，多型： 多型允許不同類別的物件對相同的方法做出不同的實現。這可以實現動態的行為，提高程式的靈活性和可擴展性。</p>
+<p>6，易於測試： OOP 的模塊化和封裝特性使得單元測試更容易進行。可以單獨測試每個物件的功能，而不需要考慮整個程式的複雜性。</p>
+<p>7，團隊合作： OOP 提供了清晰的介面和抽象，有助於多人團隊協作開發。團隊成員可以獨立地開發和測試不同的物件，然後集成到一個整體系統中。</p>
+<p>8，現實世界建模： OOP 的設計方式反映了現實世界中實體和其關係的方式，使軟體設計更接近真實需求。</p>
+<p>9，程式設計規模： OOP 有助於處理大型程式和複雜系統，因為它提供了一個結構化的方法來組織和管理程式碼。</p>
+<p>五、結構化程式設計和物件導向程式設計的比較</p>
+<p>結構化程式設計語言：</p>
+<p>優點：性能比物件導向高，因為類調用時需要產生實體，開銷比較大，比較消耗資源;比如單片機、嵌入式開發、Linux&#x2F;Unix等一般採用結構化程式設計語言開發，性能是最重要的因素。</p>
+<p>缺點：沒有物件導向易維護、易複用、易擴展</p>
+<p>物件導向：</p>
+<p>優點：易維護、易複用、易擴展，由於物件導向有封裝、繼承、多態性的特性，可以設計出低耦合的系統，使系統更加靈活、更加易於維護</p>
+<p>缺點：性能比結構化程式設計語言低</p>
+<p>結構化程式設計語言是具體化的，流程化的，解決一個問題，你需要一步一步的分析，一步一步的實現。</p>
+<p>物件導向是模型化的，你只需抽象出一個類，這是一個封閉的盒子，在這裡你擁有資料也擁有解決問題的方法。需要什麼功能直接使用就可以了，不必去一步一步的實現，至於這個功能是如何實現的，管我們什麼事？我們會用就可以了。</p>
+<p>物件導向的底層其實還是結構化程式設計語言，把結構化程式設計語言抽象成類，然後封裝，方便我們使用的就是物件導向了。</p>
+<p>六、物件導向程式設計語言</p>
+<p>以下是一些常見的物件導向程式設計語言：</p>
+<p>Java：Java 是一種廣泛用於企業應用程式開發的物件導向程式設計語言。它強調可攜性、安全性和多線程處理，並在大多數計算機平台上運行。Java提供了類、繼承、封裝、多型等物件導向概念。</p>
+<p>C++：C++ 是 C 語言的擴展，支援物件導向程式設計。它具有高性能並廣泛用於系統編程、遊戲開發和其他性能敏感的領域。C++引入了類、繼承、多型等OOP特性，同時保留了C語言的底層控制能力。</p>
+<p>C#（C Sharp）：C# 是由 Microsoft 開發的一種物件導向程式設計語言，主要用於 Windows 平台的應用程式開發。它在設計上受到 Java 和 C++ 的影響，具有強大的.NET框架支援。</p>
+<p>Python：Python 是一種易學易用的高階物件導向程式設計語言，適合多種應用，包括 Web 開發、科學計算、數據分析等。Python強調簡潔的語法和可讀性，並具有動態類型系統。</p>
+<p>Ruby：Ruby 是一種動態物件導向程式設計語言，強調簡潔和可讀性。它廣泛用於 Web 開發，特別是用於 Ruby on Rails 框架。</p>
+<p>Swift：Swift 是蘋果公司推出的一種用於 iOS 和 macOS 應用程式開發的物件導向程式設計語言。它設計用於提高效能和安全性，同時保持易用性。</p>
+<p>這些語言中，物件導向程式設計的特點在於可以將程式結構化成模塊化的單元，並通過繼承、封裝和多型等概念來實現程式的模塊化和重用。這種方法可以使程式更易於理解、維護和擴展。</p>
+<p>綜上所述，結構化程式設計強調使用結構化的控制流程來建立程式的邏輯結構，然而，它也有限制，包括程式結構受限、處理複雜性困難等。物件導向程式設計通過將程式組織成模塊化的單元，允許抽象化、繼承、封裝和多型等概念，使程式碼更具可讀性、可維護性和可擴展性。物件導向程式設計語言如Java、C++、C#、Python等，都運用了這些概念，並在不同領域中得到廣泛應用。</p>
+
+  </div>
+  <div>
+    
+      <div 
+        class="post-note note-warning copyright" 
+        style="margin-top: 42px">
+        <p>
+          <span style="font-weight: bold;">作者：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="/about">
+            Frederic_Ng
+          </a>
+        </p>
+        <p>
+          <span style="font-weight: bold;">文章链接：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="http://example.com/2023/04/07/1%20%E7%A8%8B%E5%BC%8F%E5%9F%BA%E7%A4%8E/2%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88/3%20%E7%B5%90%E6%A7%8B%E5%8C%96%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E8%AA%9E%E8%A8%80%E5%92%8C%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E8%AA%9E%E8%A8%80/">
+            http://example.com/2023/04/07/1%20%E7%A8%8B%E5%BC%8F%E5%9F%BA%E7%A4%8E/2%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88/3%20%E7%B5%90%E6%A7%8B%E5%8C%96%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E8%AA%9E%E8%A8%80%E5%92%8C%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E8%AA%9E%E8%A8%80/
+          </a>
+        </p>
+        <p><span style="font-weight: bold;">版权声明：</span>本部落格的所有文章，除特別聲明外，均採用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 協議</a>。轉載請標注出處！</p>
+      </div>
+    
+  </div>
+</article>
+<div class="nav">
+  
+    <div class="nav-item-prev">
+      <a 
+        href="/2023/04/07/1%20%E7%A8%8B%E5%BC%8F%E5%9F%BA%E7%A4%8E/2%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88/3.1%20%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E8%A8%AD%E8%A8%88%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%89%87/" 
+        class="nav-link">
+        <i class="iconfont icon-left nav-prev-icon"></i>
+        <div>
+          <div class="nav-label">上一篇</div>
+          
+            <div class="nav-title">物件導向程式設計的基本原則 </div>
+          
+        </div>
+      </a>
+    </div>
+  
+  
+    <div class="nav-item-next">
+      <a 
+        href="/2023/04/07/1%20%E7%A8%8B%E5%BC%8F%E5%9F%BA%E7%A4%8E/2%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88/2%20%E6%A9%9F%E5%99%A8%E8%AA%9E%E8%A8%80%E3%80%81%E5%8C%AF%E7%B7%A8%E8%AA%9E%E8%A8%80%E5%92%8C%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E8%AA%9E%E8%A8%80/" 
+        class="nav-link">
+        <div>
+          <div class="nav-label">下一篇</div>
+          
+            <div class="nav-title">機器語言、匯編語言和程式設計語言 </div>
+          
+        </div>
+        <i class="iconfont icon-right nav-next-icon"></i>
+      </a>
+    </div>
+  
+</div>
+
+<div 
+  class="card card-content toc-card" 
+  id="mobiletoc">
+  <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目錄
+</div>
+
+</div>
+            </main>
+            <aside class="right-column">
+              <div class="sticky-widescreen">
+  
+  
+    <article class="card card-content toc-card">
+      <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目錄
+</div>
+
+    </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header">
+    <i 
+      class="iconfont icon-wenzhang_huaban" 
+      style="padding-right: 2px;">
+    </i>最新文章
+  </div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-09-06</div>
+        <a href="/2023/09/06/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/%E6%95%B8%E6%93%9A%E5%BA%AB/ORM%E6%A1%86%E6%9E%B6/MyBatis/%E7%AD%86%E8%A8%98/MyBatis%20%E7%B5%90%E6%9E%9C%E9%9B%86%E7%9A%84%E6%98%A0%E5%B0%84/"><div class="recent-posts-item-content">MyBatis 結果集的映射</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-09-06</div>
+        <a href="/2023/09/06/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/%E6%95%B8%E6%93%9A%E5%BA%AB/ORM%E6%A1%86%E6%9E%B6/MyBatis/%E7%AD%86%E8%A8%98/MyBatis%20%E7%B7%A9%E5%AD%98/"><div class="recent-posts-item-content">MyBatis 緩存</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-09-05</div>
+        <a href="/2023/09/05/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/%E6%95%B8%E6%93%9A%E5%BA%AB/ORM%E6%A1%86%E6%9E%B6/MyBatis/%E7%AD%86%E8%A8%98/MyBatic%20%E5%88%86%E9%A0%81%E6%8F%92%E4%BB%B6/"><div class="recent-posts-item-content">MyBatic 分頁插件</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-09-05</div>
+        <a href="/2023/09/05/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/%E6%95%B8%E6%93%9A%E5%BA%AB/ORM%E6%A1%86%E6%9E%B6/MyBatis/%E7%AD%86%E8%A8%98/MyBatis%20Genarator/"><div class="recent-posts-item-content">MyBatis Genarator</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+     
+    <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>
+          Copyright ©
+          
+            2020
+          
+          
+                - 
+                2023
+          
+        </span>
+        &nbsp;
+        <a 
+          href="/" 
+          class="footer-link">
+          Frederic的技術學習筆記
+        </a>
+      </div>
+    </div>
+
+    
+      <div class="footer-dsc">
+        
+          Powered by
+          <a 
+            href="https://hexo.io/" 
+            class="footer-link" 
+            target="_blank" 
+            rel="nofollow noopener noreferrer">
+            &nbsp;Hexo
+          </a>
+        
+        
+          <span>&nbsp;|&nbsp;</span>
+        
+        
+          Theme -
+          <a 
+            href="https://github.com/theme-kaze" 
+            class="footer-link" 
+            target="_blank"
+            rel="nofollow noopener noreferrer">
+            &nbsp;Kaze
+          </a>
+        
+      </div>
+    
+    
+    
+    
+</footer>
+ 
+    
+  <a 
+    role="button" 
+    id="scrollbutton" 
+    class="basebutton" 
+    aria-label="回到顶部">
+    <i class="iconfont icon-arrowleft button-icon"></i>
+  </a>
+
+<a 
+  role="button" 
+  id="menubutton"
+  aria-label="menu button"
+  class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="popbutton" 
+  class="basebutton" 
+  aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="darkbutton" 
+  class="basebutton darkwidget" 
+  aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="searchbutton" 
+  class="basebutton searchwidget" 
+  aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a> 
+     
+     
+     
+      <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img')
+    var i
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a')
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'))
+      wrapper.setAttribute('aria-label', 'illustration')
+      wrapper.style.cssText =
+        'width: 100%; display: flex; justify-content: center;'
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt
+      wrapper.dataset.nolink = true
+      img[i].before(wrapper)
+      wrapper.append(img[i])
+      var divWrap = document.createElement('div')
+      divWrap.classList.add('gallery')
+      wrapper.before(divWrap)
+      divWrap.append(wrapper)
+    }
+    baguetteBox.run('.gallery')
+  }
+</script>
+<script>
+  loadScript(
+    "/js/lib/lightbox/baguetteBox.min.js",
+    addImgLayout
+  )
+</script>
+ 
+     
+     
+    <script src="/js/main.js"></script> 
+     
+    
+      <script>
+        var addLazyload = function () {
+          var observer = lozad('.lozad', {
+            load: function (el) {
+              el.srcset = el.getAttribute('data-src')
+            },
+            loaded: function (el) {
+              el.classList.add('loaded')
+            },
+          })
+          observer.observe()
+        }
+      </script>
+      <script>
+        loadScript('/js/lib/lozad.min.js', addLazyload)
+      </script>
+    
+    <script src="//instant.page/5.1.0" type="module"
+      integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"></script>
+    
+    
+  </body>
+</html>

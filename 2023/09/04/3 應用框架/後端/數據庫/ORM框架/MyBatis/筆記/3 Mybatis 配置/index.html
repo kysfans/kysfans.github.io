@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+  <meta charset="UTF-8">
+  <meta 
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta 
+    http-equiv="X-UA-Compatible" 
+    content="ie=edge">
+  <meta 
+    name="theme-color" 
+    content="#fff" 
+    id="theme-color">
+  <meta 
+    name="description" 
+    content="Hexo">
+  <link 
+    rel="icon" 
+    href="https://img.songhn.com/img/Y67gdd.png">
+  <title>3 Mybatis 配置</title>
+  
+    
+      <meta 
+        property="og:title" 
+        content="3 Mybatis 配置">
+    
+    
+      <meta 
+        property="og:url" 
+        content="http://example.com/2023/09/04/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/%E6%95%B8%E6%93%9A%E5%BA%AB/ORM%E6%A1%86%E6%9E%B6/MyBatis/%E7%AD%86%E8%A8%98/3%20Mybatis%20%E9%85%8D%E7%BD%AE/index.html">
+    
+    
+      <meta 
+        property="og:img" 
+        content="/img/profile.png">
+    
+    
+    
+      <meta 
+        property="og:type" 
+        content="article">
+      <meta 
+        property="og:article:published_time" 
+        content="2023-09-04">
+      <meta 
+        property="og:article:modified_time" 
+        content="2023-08-26">
+      <meta 
+        property="og:article:author" 
+        content="Frederic_Ng">
+      
+        
+          <meta 
+            property="og:article:tag" 
+            content="筆記">
+        
+      
+    
+  
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  <link rel="preload" href="/css/main.css" as="style" >
+  
+  <link rel="modulepreload" href="//instant.page/5.1.0">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+  
+  
+  
+    <link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+  
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+    function loadCSS(href, data, attr) {
+      var sheet = document.createElement('link');
+      sheet.ref = 'stylesheet';
+      sheet.href = href;
+      sheet.dataset[data] = attr;
+      document.head.appendChild(sheet);
+    }
+    function changeCSS(cssFile, data, attr) {
+      var oldlink = document.querySelector(data);
+      var newlink = document.createElement("link");
+      newlink.setAttribute("rel", "stylesheet");
+      newlink.setAttribute("href", cssFile);
+      newlink.dataset.prism = attr;
+      document.head.replaceChild(newlink, oldlink);
+    }
+  </script>
+  
+    
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+  </script>
+  
+    <script>
+      var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+        document.getElementById('theme-color').dataset.mode = getCssMediaQuery();
+      }
+    };
+    setDarkmode();
+    </script>
+  
+  
+  
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+    <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <div class="wrapper">
+       
+      <nav class="navbar">
+  <div class="navbar-logo">
+    <a class="navbar-logo-main" href="/">
+      
+        <img 
+          class="navbar-logo-img"
+          width="32"
+          height="32"
+          src="https://img.songhn.com/img/Y67gdd.png" 
+          alt="blog logo">
+      
+      <span class="navbar-logo-dsc">Frederic的技術學習筆記</span>
+      </a>
+  </div>
+  <div class="navbar-menu">
+    
+      <a 
+        href="/" 
+        class="navbar-menu-item">
+        
+          首頁
+        
+      </a>
+    
+      <a 
+        href="/archives" 
+        class="navbar-menu-item">
+        
+          存檔
+        
+      </a>
+    
+      <a 
+        href="/tags" 
+        class="navbar-menu-item">
+        
+          標籤
+        
+      </a>
+    
+      <a 
+        href="/categories" 
+        class="navbar-menu-item">
+        
+          分類
+        
+      </a>
+    
+      <a 
+        href="/about" 
+        class="navbar-menu-item">
+        
+          關於
+        
+      </a>
+    
+      <a 
+        href="/links" 
+        class="navbar-menu-item">
+        
+          友鏈
+        
+      </a>
+    
+    <button 
+      class="navbar-menu-item darknavbar navbar-menu-btn" 
+      aria-label="Toggle dark mode"
+      id="dark">
+      <i class="iconfont icon-weather"></i>
+    </button>
+    <button 
+      class="navbar-menu-item searchnavbar navbar-menu-btn" 
+      aria-label="Toggle search"
+      id="search">
+      <!-- <i 
+        class="iconfont icon-search" 
+        style="font-size: 1.2rem; font-weight: 400;">
+      </i> -->
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+        class="iconify iconify--ion" width="28" height="28" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512">
+        <path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="28"
+          d="M256 80a176 176 0 1 0 176 176A176 176 0 0 0 256 80Z"></path>
+        <path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="28"
+          d="M232 160a72 72 0 1 0 72 72a72 72 0 0 0-72-72Z"></path>
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="28"
+          d="M283.64 283.64L336 336"></path>
+      </svg>
+    </button>
+  </div>
+</nav> 
+      
+      <div 
+        id="local-search" 
+        style="display: none">
+        <input
+          class="navbar-menu-item"
+          id="search-input"
+          placeholder="请输入搜索内容..." />
+        <div id="search-content"></div>
+      </div>
+      
+      <div class="section-wrap">
+        <div class="container">
+          <div class="columns">
+            <aside class="left-column">
+              
+              <div class="card card-author">
+                
+  <img 
+    src="/img/profile.png" 
+    class="author-img"
+    width="88"
+    height="88"
+    alt="author avatar">
+
+<p class="author-name">Frederic_Ng</p>
+<p class="author-description">立志成為軟體工程師的文科生</p>
+<div class="author-message">
+  <a 
+    class="author-posts-count" 
+    href="/archives">
+    <span>177</span>
+    <span>文章</span>
+  </a>
+  <a 
+    class="author-categories-count" 
+    href="/categories">
+    <span>10</span>
+    <span>分類</span>
+  </a>
+  <a 
+    class="author-tags-count" 
+    href="/tags">
+    <span>22</span>
+    <span>標籤</span>
+  </a>
+</div>
+
+  <div class="author-card-society">
+    
+      <div class="author-card-society-icon">
+        <a target="_blank" rel="noopener" href="https://github.com/kysfans">
+          <i class="iconfont icon-github society-icon"></i>
+        </a>
+      </div>
+    
+  </div>
+
+              </div>
+               <div class="sticky-tablet">
+  
+  
+    <article class="display-when-two-columns spacer">
+      <div class="card card-content toc-card">
+        <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目錄
+</div>
+
+      </div>
+    </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header">
+    <i 
+      class="iconfont icon-fenlei" 
+      style="padding-right: 2px;">
+    </i>分類
+  </div>
+  <div class="categories-list">
+    
+      <a href="/categories/%E7%A8%8B%E5%BA%8F%E8%A8%AD%E8%A8%88/">
+        <div class="categories-list-item">
+          程序設計
+          <span class="categories-list-item-badge">6</span>
+        </div>
+      </a>
+    
+      <a href="/categories/CMD/">
+        <div class="categories-list-item">
+          CMD
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E6%95%B8%E6%93%9A%E5%BA%AB/">
+        <div class="categories-list-item">
+          數據庫
+          <span class="categories-list-item-badge">9</span>
+        </div>
+      </a>
+    
+      <a href="/categories/JAVA%E7%B0%A1%E4%BB%8B/">
+        <div class="categories-list-item">
+          JAVA簡介
+          <span class="categories-list-item-badge">9</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Spring-%E6%A1%86%E6%9E%B6/">
+        <div class="categories-list-item">
+          Spring-框架
+          <span class="categories-list-item-badge">9</span>
+        </div>
+      </a>
+    
+      <a href="/categories/JAVA%E5%9F%BA%E6%9C%AC%E8%AA%9E%E6%B3%95/">
+        <div class="categories-list-item">
+          JAVA基本語法
+          <span class="categories-list-item-badge">23</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Java%E5%9F%BA%E6%9C%AC%E8%AA%9E%E6%B3%95/">
+        <div class="categories-list-item">
+          Java基本語法
+          <span class="categories-list-item-badge">22</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Java%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91/">
+        <div class="categories-list-item">
+          Java物件導向
+          <span class="categories-list-item-badge">24</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Java%E5%85%B6%E4%BB%96%E6%A6%82%E5%BF%B5/">
+        <div class="categories-list-item">
+          Java其他概念
+          <span class="categories-list-item-badge">62</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ORM%E6%A1%86%E6%9E%B6/">
+        <div class="categories-list-item">
+          ORM框架
+          <span class="categories-list-item-badge">12</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header">
+    <i 
+      class="iconfont icon-biaoqian" 
+      style="padding-right: 2px;">
+    </i>熱門標籤
+  </div>
+  <div class="tags-list">
+    
+      <a 
+        href="/tags/%E7%AD%86%E8%A8%98/" 
+        title="筆記">
+        <div class="tags-list-item">筆記</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E9%80%B2%E9%9A%8E/" 
+        title="Java 物件導向進階">
+        <div class="tags-list-item">Java 物件導向進階</div>
+      </a>
+    
+      <a 
+        href="/tags/List/" 
+        title="List">
+        <div class="tags-list-item">List</div>
+      </a>
+    
+      <a 
+        href="/tags/Java%E9%97%9C%E9%8D%B5%E5%AD%97/" 
+        title="Java關鍵字">
+        <div class="tags-list-item">Java關鍵字</div>
+      </a>
+    
+      <a 
+        href="/tags/Java%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/" 
+        title="Java流程控制">
+        <div class="tags-list-item">Java流程控制</div>
+      </a>
+    
+      <a 
+        href="/tags/Set/" 
+        title="Set">
+        <div class="tags-list-item">Set</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-IO/" 
+        title="Java IO">
+        <div class="tags-list-item">Java IO</div>
+      </a>
+    
+      <a 
+        href="/tags/Java%E9%81%8B%E7%AE%97/" 
+        title="Java運算">
+        <div class="tags-list-item">Java運算</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-%E7%95%B0%E5%B8%B8/" 
+        title="Java 異常">
+        <div class="tags-list-item">Java 異常</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E5%9F%BA%E7%A4%8E/" 
+        title="Java 物件導向基礎">
+        <div class="tags-list-item">Java 物件導向基礎</div>
+      </a>
+    
+      <a 
+        href="/tags/Java%E6%96%B9%E6%B3%95/" 
+        title="Java方法">
+        <div class="tags-list-item">Java方法</div>
+      </a>
+    
+      <a 
+        href="/tags/Map/" 
+        title="Map">
+        <div class="tags-list-item">Map</div>
+      </a>
+    
+      <a 
+        href="/tags/Collection/" 
+        title="Collection">
+        <div class="tags-list-item">Collection</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-%E6%B3%9B%E5%9E%8B/" 
+        title="Java 泛型">
+        <div class="tags-list-item">Java 泛型</div>
+      </a>
+    
+      <a 
+        href="/tags/Java%E9%99%A3%E5%88%97/" 
+        title="Java陣列">
+        <div class="tags-list-item">Java陣列</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-%E5%8F%8D%E5%B0%84/" 
+        title="Java 反射">
+        <div class="tags-list-item">Java 反射</div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+            <main class="main-column">
+              
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      3 Mybatis 配置
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2023-09-03T16:00:00.000Z">
+      <i 
+        class="iconfont icon-calendar" 
+        style="margin-right: 2px;">
+      </i>
+      <span>2023-09-04</span>
+    </time>
+    
+      <span class="dot"></span>
+      
+        <a 
+          href="/categories/ORM%E6%A1%86%E6%9E%B6/" 
+          class="post-meta-link">
+          ORM框架
+        </a>
+      
+    
+    
+      <span class="dot"></span>
+      <span>940 個字</span>
+    
+  </div>
+  
+    <div 
+      class="post-meta post-show-meta" 
+      style="margin-top: -10px;">
+      <div style="display: flex; align-items: center;">
+        <i 
+          class="iconfont icon-biaoqian" 
+          style="margin-right: 2px; font-size: 1.15rem;">
+        </i>
+        
+          
+          <a 
+            href="/tags/%E7%AD%86%E8%A8%98/" 
+            class="post-meta-link">
+            筆記
+          </a>
+        
+      </div>
+    </div>
+  
+  </header>
+  <div 
+    id="section" 
+    class="post-content">
+    <p>配置 MyBatis、創建映射文件並建立 Java 對象和數據庫表之間的映射關係需要進行一系列步驟。以下是一個基本的指南，幫助您開始使用 MyBatis 進行數據庫操作：  </p>
+<p><strong>步驟一：配置 MyBatis</strong>  </p>
+<p><strong>引入 MyBatis 相關的依賴：</strong> 在您的項目中，首先需要將 MyBatis 相關的依賴加入到項目的 build 配置中，以便您可以在代碼中使用 MyBatis。  </p>
+<dependency>  
+    <groupId>org.mybatis.spring.boot</groupId>  
+    <artifactId>mybatis-spring-boot-starter</artifactId>  
+    <version>2.2.0</version> <!-- 请使用最新版本 -->  
+</dependency>  
+<!-- 添加适当的数据库驱动依赖 -->  
+  
+<p>配置数据源：在application.properties或application.yml文件中配置您的数据源信息，包括数据库URL、用户名、密码等。  </p>
+<p>spring.datasource.url&#x3D;jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;mydatabase<br>spring.datasource.username&#x3D;myuser<br>spring.datasource.password&#x3D;mypassword<br>spring.datasource.driver-class-name&#x3D;com.mysql.cj.jdbc.Driver  </p>
+<p>配置MyBatis：在application.properties或application.yml文件中添加MyBatis的配置信息。  </p>
+<p>mybatis.mapper-locations&#x3D;classpath:mapper&#x2F;*.xml  </p>
+<p><strong>步驟二：創建映射文件</strong>  </p>
+<p><strong>定義映射器接口：</strong> 創建一個 Java 接口，該接口將定義與數據庫操作相關的方法。每個方法將對應一個 SQL 查詢或更新操作。  </p>
+<p>@Mapper<br>public interface UserMapper {<br>    List<User> getAllUsers();<br>    &#x2F;&#x2F; 其他方法…<br>}  </p>
+<p><strong>創建映射文件：</strong> 創建一個 XML 文件，這個文件將包含 SQL 語句和與 Java 方法的映射。這些映射文件通常與映射器接口相對應，並存儲在一個特定的目錄中。  </p>
+<!-- resources/mapper/UserMapper.xml -->  
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"><mapper namespace="com.example.mapper.UserMapper">  
+    <select id="getAllUsers" resultType="com.example.model.User">  
+        SELECT * FROM users  
+    </select>  
+    <!-- 其他SQL语句... -->  
+</mapper>  
+  
+  
+<ol start="3">
+<li>在Service中使用Mapper：在您的Service层中注入Mapper接口，并在业务方法中调用Mapper的方法。</li>
+</ol>
+<p>@Service<br>public class UserService {<br>    private final UserMapper userMapper;  </p>
+<pre><code>@Autowired  
+public UserService(UserMapper userMapper) &#123;  
+    this.userMapper = userMapper;  
+&#125;  
+
+public List&lt;User&gt; getAllUsers() &#123;  
+    return userMapper.getAllUsers();  
+&#125;  
+</code></pre>
+<p>}  </p>
+<p>在 MyBatis 中，映射文件（Mapper XML 文件）用於定義 SQL 查詢、映射關係和其他與數據庫操作相關的內容。以下是創建 MyBatis 映射文件的基本步驟：  </p>
+<p><strong>步驟一：創建映射文件</strong>  </p>
+<ol>
+<li><p>在您的 MyBatis 項目中，創建一個文件夾（通常命名為 <code>mapper</code> 或 <code>mappers</code>）來存放映射文件。  </p>
+</li>
+<li><p>在該文件夾中創建一個 XML 文件，命名為與您的映射器接口相對應的名稱，並以 <code>.xml</code> 為後綴。例如，如果您有一個名為 <code>UserMapper</code> 的映射器接口，則映射文件可以命名為 <code>UserMapper.xml</code>。</p>
+</li>
+</ol>
+<p><strong>步驟二：定義命名空間</strong>  </p>
+<p>在映射文件的頂部，定義命名空間（namespace），該命名空間應該與您的映射器接口的全限定名相同。  </p>
+<pre><code class="xml">&lt;!-- UserMapper.xml --&gt;  
+&lt;mapper namespace=&quot;com.example.UserMapper&quot;&gt;  
+    &lt;!-- 映射操作將在這裡定義 --&gt;  
+&lt;/mapper&gt;  
+</code></pre>
+<p><strong>步驟三：定義 SQL 查詢和操作</strong>  </p>
+<p>在 <code>&lt;mapper&gt;</code> 元素中，您可以定義多個 <code>&lt;select&gt;</code>、<code>&lt;insert&gt;</code>、<code>&lt;update&gt;</code> 和 <code>&lt;delete&gt;</code> 元素，分別對應不同的 SQL 操作。  </p>
+<pre><code class="xml">&lt;!-- UserMapper.xml --&gt;  
+&lt;mapper namespace=&quot;com.example.UserMapper&quot;&gt;  
+    &lt;!-- 定義一個查詢所有用戶的 SQL --&gt;  
+    &lt;select id=&quot;getAllUsers&quot; resultType=&quot;User&quot;&gt;  
+        SELECT * FROM users  
+    &lt;/select&gt;  
+      
+    &lt;!-- 定義一個按照 ID 查詢用戶的 SQL --&gt;  
+    &lt;select id=&quot;getUserById&quot; resultType=&quot;User&quot; parameterType=&quot;Long&quot;&gt;  
+        SELECT * FROM users WHERE id = #&#123;id&#125;  
+    &lt;/select&gt;  
+      
+    &lt;!-- 定義一個插入用戶的 SQL --&gt;  
+    &lt;insert id=&quot;insertUser&quot; parameterType=&quot;User&quot;&gt;  
+        INSERT INTO users (id, username, email) VALUES (#&#123;id&#125;, #&#123;username&#125;, #&#123;email&#125;)  
+    &lt;/insert&gt;  
+      
+    &lt;!-- 其他操作... --&gt;  
+&lt;/mapper&gt;  
+</code></pre>
+<p><strong>步驟四：映射結果</strong>  </p>
+<p>在 <code>&lt;select&gt;</code> 元素中，使用 <code>&lt;resultMap&gt;</code> 元素定義結果集的映射。  </p>
+<pre><code class="xml">&lt;!-- UserMapper.xml --&gt;  
+&lt;mapper namespace=&quot;com.example.UserMapper&quot;&gt;  
+    &lt;resultMap id=&quot;userResultMap&quot; type=&quot;User&quot;&gt;  
+        &lt;id property=&quot;id&quot; column=&quot;id&quot;/&gt;  
+        &lt;result property=&quot;username&quot; column=&quot;username&quot;/&gt;  
+        &lt;result property=&quot;email&quot; column=&quot;email&quot;/&gt;  
+    &lt;/resultMap&gt;  
+      
+    &lt;select id=&quot;getUserById&quot; resultMap=&quot;userResultMap&quot; parameterType=&quot;Long&quot;&gt;  
+        SELECT * FROM users WHERE id = #&#123;id&#125;  
+    &lt;/select&gt;  
+      
+    &lt;!-- 其他操作... --&gt;  
+&lt;/mapper&gt;  
+</code></pre>
+
+  </div>
+  <div>
+    
+      <div 
+        class="post-note note-warning copyright" 
+        style="margin-top: 42px">
+        <p>
+          <span style="font-weight: bold;">作者：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="/about">
+            Frederic_Ng
+          </a>
+        </p>
+        <p>
+          <span style="font-weight: bold;">文章链接：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="http://example.com/2023/09/04/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/%E6%95%B8%E6%93%9A%E5%BA%AB/ORM%E6%A1%86%E6%9E%B6/MyBatis/%E7%AD%86%E8%A8%98/3%20Mybatis%20%E9%85%8D%E7%BD%AE/">
+            http://example.com/2023/09/04/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/%E6%95%B8%E6%93%9A%E5%BA%AB/ORM%E6%A1%86%E6%9E%B6/MyBatis/%E7%AD%86%E8%A8%98/3%20Mybatis%20%E9%85%8D%E7%BD%AE/
+          </a>
+        </p>
+        <p><span style="font-weight: bold;">版权声明：</span>本部落格的所有文章，除特別聲明外，均採用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 協議</a>。轉載請標注出處！</p>
+      </div>
+    
+  </div>
+</article>
+<div class="nav">
+  
+    <div class="nav-item-prev">
+      <a 
+        href="/2023/09/04/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/%E6%95%B8%E6%93%9A%E5%BA%AB/ORM%E6%A1%86%E6%9E%B6/MyBatis/%E7%AD%86%E8%A8%98/2%20MyBatis%20%E7%B0%A1%E4%BB%8B/" 
+        class="nav-link">
+        <i class="iconfont icon-left nav-prev-icon"></i>
+        <div>
+          <div class="nav-label">上一篇</div>
+          
+            <div class="nav-title">2 MyBatis 簡介 </div>
+          
+        </div>
+      </a>
+    </div>
+  
+  
+    <div class="nav-item-next">
+      <a 
+        href="/2023/09/04/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/%E6%95%B8%E6%93%9A%E5%BA%AB/ORM%E6%A1%86%E6%9E%B6/MyBatis/%E7%AD%86%E8%A8%98/4%20MyBatis%20%E9%9D%9C%E6%85%8BSQL%E6%9F%A5%E8%A9%A2/" 
+        class="nav-link">
+        <div>
+          <div class="nav-label">下一篇</div>
+          
+            <div class="nav-title">4 MyBatis 靜態SQL查詢 </div>
+          
+        </div>
+        <i class="iconfont icon-right nav-next-icon"></i>
+      </a>
+    </div>
+  
+</div>
+
+<div 
+  class="card card-content toc-card" 
+  id="mobiletoc">
+  <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目錄
+</div>
+
+</div>
+            </main>
+            <aside class="right-column">
+              <div class="sticky-widescreen">
+  
+  
+    <article class="card card-content toc-card">
+      <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目錄
+</div>
+
+    </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header">
+    <i 
+      class="iconfont icon-wenzhang_huaban" 
+      style="padding-right: 2px;">
+    </i>最新文章
+  </div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-09-06</div>
+        <a href="/2023/09/06/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/%E6%95%B8%E6%93%9A%E5%BA%AB/ORM%E6%A1%86%E6%9E%B6/MyBatis/%E7%AD%86%E8%A8%98/MyBatis%20%E7%B5%90%E6%9E%9C%E9%9B%86%E7%9A%84%E6%98%A0%E5%B0%84/"><div class="recent-posts-item-content">MyBatis 結果集的映射</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-09-06</div>
+        <a href="/2023/09/06/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/%E6%95%B8%E6%93%9A%E5%BA%AB/ORM%E6%A1%86%E6%9E%B6/MyBatis/%E7%AD%86%E8%A8%98/MyBatis%20%E7%B7%A9%E5%AD%98/"><div class="recent-posts-item-content">MyBatis 緩存</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-09-05</div>
+        <a href="/2023/09/05/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/%E6%95%B8%E6%93%9A%E5%BA%AB/ORM%E6%A1%86%E6%9E%B6/MyBatis/%E7%AD%86%E8%A8%98/MyBatic%20%E5%88%86%E9%A0%81%E6%8F%92%E4%BB%B6/"><div class="recent-posts-item-content">MyBatic 分頁插件</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-09-05</div>
+        <a href="/2023/09/05/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/%E6%95%B8%E6%93%9A%E5%BA%AB/ORM%E6%A1%86%E6%9E%B6/MyBatis/%E7%AD%86%E8%A8%98/MyBatis%20Genarator/"><div class="recent-posts-item-content">MyBatis Genarator</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+     
+    <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>
+          Copyright ©
+          
+            2020
+          
+          
+                - 
+                2023
+          
+        </span>
+        &nbsp;
+        <a 
+          href="/" 
+          class="footer-link">
+          Frederic的技術學習筆記
+        </a>
+      </div>
+    </div>
+
+    
+      <div class="footer-dsc">
+        
+          Powered by
+          <a 
+            href="https://hexo.io/" 
+            class="footer-link" 
+            target="_blank" 
+            rel="nofollow noopener noreferrer">
+            &nbsp;Hexo
+          </a>
+        
+        
+          <span>&nbsp;|&nbsp;</span>
+        
+        
+          Theme -
+          <a 
+            href="https://github.com/theme-kaze" 
+            class="footer-link" 
+            target="_blank"
+            rel="nofollow noopener noreferrer">
+            &nbsp;Kaze
+          </a>
+        
+      </div>
+    
+    
+    
+    
+</footer>
+ 
+    
+  <a 
+    role="button" 
+    id="scrollbutton" 
+    class="basebutton" 
+    aria-label="回到顶部">
+    <i class="iconfont icon-arrowleft button-icon"></i>
+  </a>
+
+<a 
+  role="button" 
+  id="menubutton"
+  aria-label="menu button"
+  class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="popbutton" 
+  class="basebutton" 
+  aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="darkbutton" 
+  class="basebutton darkwidget" 
+  aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="searchbutton" 
+  class="basebutton searchwidget" 
+  aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a> 
+     
+     
+     
+      <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img')
+    var i
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a')
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'))
+      wrapper.setAttribute('aria-label', 'illustration')
+      wrapper.style.cssText =
+        'width: 100%; display: flex; justify-content: center;'
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt
+      wrapper.dataset.nolink = true
+      img[i].before(wrapper)
+      wrapper.append(img[i])
+      var divWrap = document.createElement('div')
+      divWrap.classList.add('gallery')
+      wrapper.before(divWrap)
+      divWrap.append(wrapper)
+    }
+    baguetteBox.run('.gallery')
+  }
+</script>
+<script>
+  loadScript(
+    "/js/lib/lightbox/baguetteBox.min.js",
+    addImgLayout
+  )
+</script>
+ 
+     
+     
+    <script src="/js/main.js"></script> 
+     
+    
+      <script>
+        var addLazyload = function () {
+          var observer = lozad('.lozad', {
+            load: function (el) {
+              el.srcset = el.getAttribute('data-src')
+            },
+            loaded: function (el) {
+              el.classList.add('loaded')
+            },
+          })
+          observer.observe()
+        }
+      </script>
+      <script>
+        loadScript('/js/lib/lozad.min.js', addLazyload)
+      </script>
+    
+    <script src="//instant.page/5.1.0" type="module"
+      integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"></script>
+    
+    
+  </body>
+</html>

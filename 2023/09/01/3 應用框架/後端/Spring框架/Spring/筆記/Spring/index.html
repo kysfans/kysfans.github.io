@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+  <meta charset="UTF-8">
+  <meta 
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta 
+    http-equiv="X-UA-Compatible" 
+    content="ie=edge">
+  <meta 
+    name="theme-color" 
+    content="#fff" 
+    id="theme-color">
+  <meta 
+    name="description" 
+    content="Hexo">
+  <link 
+    rel="icon" 
+    href="https://img.songhn.com/img/Y67gdd.png">
+  <title>Spring</title>
+  
+    
+      <meta 
+        property="og:title" 
+        content="Spring">
+    
+    
+      <meta 
+        property="og:url" 
+        content="http://example.com/2023/09/01/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/Spring%E6%A1%86%E6%9E%B6/Spring/%E7%AD%86%E8%A8%98/Spring/index.html">
+    
+    
+      <meta 
+        property="og:img" 
+        content="/img/profile.png">
+    
+    
+    
+      <meta 
+        property="og:type" 
+        content="article">
+      <meta 
+        property="og:article:published_time" 
+        content="2023-09-01">
+      <meta 
+        property="og:article:modified_time" 
+        content="2023-08-26">
+      <meta 
+        property="og:article:author" 
+        content="Frederic_Ng">
+      
+        
+          <meta 
+            property="og:article:tag" 
+            content="筆記">
+        
+      
+    
+  
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  <link rel="preload" href="/css/main.css" as="style" >
+  
+  <link rel="modulepreload" href="//instant.page/5.1.0">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+  
+  
+  
+    <link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+  
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+    function loadCSS(href, data, attr) {
+      var sheet = document.createElement('link');
+      sheet.ref = 'stylesheet';
+      sheet.href = href;
+      sheet.dataset[data] = attr;
+      document.head.appendChild(sheet);
+    }
+    function changeCSS(cssFile, data, attr) {
+      var oldlink = document.querySelector(data);
+      var newlink = document.createElement("link");
+      newlink.setAttribute("rel", "stylesheet");
+      newlink.setAttribute("href", cssFile);
+      newlink.dataset.prism = attr;
+      document.head.replaceChild(newlink, oldlink);
+    }
+  </script>
+  
+    
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+  </script>
+  
+    <script>
+      var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+        document.getElementById('theme-color').dataset.mode = getCssMediaQuery();
+      }
+    };
+    setDarkmode();
+    </script>
+  
+  
+  
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+    <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <div class="wrapper">
+       
+      <nav class="navbar">
+  <div class="navbar-logo">
+    <a class="navbar-logo-main" href="/">
+      
+        <img 
+          class="navbar-logo-img"
+          width="32"
+          height="32"
+          src="https://img.songhn.com/img/Y67gdd.png" 
+          alt="blog logo">
+      
+      <span class="navbar-logo-dsc">Frederic的技術學習筆記</span>
+      </a>
+  </div>
+  <div class="navbar-menu">
+    
+      <a 
+        href="/" 
+        class="navbar-menu-item">
+        
+          首頁
+        
+      </a>
+    
+      <a 
+        href="/archives" 
+        class="navbar-menu-item">
+        
+          存檔
+        
+      </a>
+    
+      <a 
+        href="/tags" 
+        class="navbar-menu-item">
+        
+          標籤
+        
+      </a>
+    
+      <a 
+        href="/categories" 
+        class="navbar-menu-item">
+        
+          分類
+        
+      </a>
+    
+      <a 
+        href="/about" 
+        class="navbar-menu-item">
+        
+          關於
+        
+      </a>
+    
+      <a 
+        href="/links" 
+        class="navbar-menu-item">
+        
+          友鏈
+        
+      </a>
+    
+    <button 
+      class="navbar-menu-item darknavbar navbar-menu-btn" 
+      aria-label="Toggle dark mode"
+      id="dark">
+      <i class="iconfont icon-weather"></i>
+    </button>
+    <button 
+      class="navbar-menu-item searchnavbar navbar-menu-btn" 
+      aria-label="Toggle search"
+      id="search">
+      <!-- <i 
+        class="iconfont icon-search" 
+        style="font-size: 1.2rem; font-weight: 400;">
+      </i> -->
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+        class="iconify iconify--ion" width="28" height="28" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512">
+        <path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="28"
+          d="M256 80a176 176 0 1 0 176 176A176 176 0 0 0 256 80Z"></path>
+        <path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="28"
+          d="M232 160a72 72 0 1 0 72 72a72 72 0 0 0-72-72Z"></path>
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="28"
+          d="M283.64 283.64L336 336"></path>
+      </svg>
+    </button>
+  </div>
+</nav> 
+      
+      <div 
+        id="local-search" 
+        style="display: none">
+        <input
+          class="navbar-menu-item"
+          id="search-input"
+          placeholder="请输入搜索内容..." />
+        <div id="search-content"></div>
+      </div>
+      
+      <div class="section-wrap">
+        <div class="container">
+          <div class="columns">
+            <aside class="left-column">
+              
+              <div class="card card-author">
+                
+  <img 
+    src="/img/profile.png" 
+    class="author-img"
+    width="88"
+    height="88"
+    alt="author avatar">
+
+<p class="author-name">Frederic_Ng</p>
+<p class="author-description">立志成為軟體工程師的文科生</p>
+<div class="author-message">
+  <a 
+    class="author-posts-count" 
+    href="/archives">
+    <span>177</span>
+    <span>文章</span>
+  </a>
+  <a 
+    class="author-categories-count" 
+    href="/categories">
+    <span>10</span>
+    <span>分類</span>
+  </a>
+  <a 
+    class="author-tags-count" 
+    href="/tags">
+    <span>22</span>
+    <span>標籤</span>
+  </a>
+</div>
+
+  <div class="author-card-society">
+    
+      <div class="author-card-society-icon">
+        <a target="_blank" rel="noopener" href="https://github.com/kysfans">
+          <i class="iconfont icon-github society-icon"></i>
+        </a>
+      </div>
+    
+  </div>
+
+              </div>
+               <div class="sticky-tablet">
+  
+  
+    <article class="display-when-two-columns spacer">
+      <div class="card card-content toc-card">
+        <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目錄
+</div>
+
+      </div>
+    </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header">
+    <i 
+      class="iconfont icon-fenlei" 
+      style="padding-right: 2px;">
+    </i>分類
+  </div>
+  <div class="categories-list">
+    
+      <a href="/categories/%E7%A8%8B%E5%BA%8F%E8%A8%AD%E8%A8%88/">
+        <div class="categories-list-item">
+          程序設計
+          <span class="categories-list-item-badge">6</span>
+        </div>
+      </a>
+    
+      <a href="/categories/CMD/">
+        <div class="categories-list-item">
+          CMD
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E6%95%B8%E6%93%9A%E5%BA%AB/">
+        <div class="categories-list-item">
+          數據庫
+          <span class="categories-list-item-badge">9</span>
+        </div>
+      </a>
+    
+      <a href="/categories/JAVA%E7%B0%A1%E4%BB%8B/">
+        <div class="categories-list-item">
+          JAVA簡介
+          <span class="categories-list-item-badge">9</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Spring-%E6%A1%86%E6%9E%B6/">
+        <div class="categories-list-item">
+          Spring-框架
+          <span class="categories-list-item-badge">9</span>
+        </div>
+      </a>
+    
+      <a href="/categories/JAVA%E5%9F%BA%E6%9C%AC%E8%AA%9E%E6%B3%95/">
+        <div class="categories-list-item">
+          JAVA基本語法
+          <span class="categories-list-item-badge">23</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Java%E5%9F%BA%E6%9C%AC%E8%AA%9E%E6%B3%95/">
+        <div class="categories-list-item">
+          Java基本語法
+          <span class="categories-list-item-badge">22</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Java%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91/">
+        <div class="categories-list-item">
+          Java物件導向
+          <span class="categories-list-item-badge">24</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Java%E5%85%B6%E4%BB%96%E6%A6%82%E5%BF%B5/">
+        <div class="categories-list-item">
+          Java其他概念
+          <span class="categories-list-item-badge">62</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ORM%E6%A1%86%E6%9E%B6/">
+        <div class="categories-list-item">
+          ORM框架
+          <span class="categories-list-item-badge">12</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header">
+    <i 
+      class="iconfont icon-biaoqian" 
+      style="padding-right: 2px;">
+    </i>熱門標籤
+  </div>
+  <div class="tags-list">
+    
+      <a 
+        href="/tags/%E7%AD%86%E8%A8%98/" 
+        title="筆記">
+        <div class="tags-list-item">筆記</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E9%80%B2%E9%9A%8E/" 
+        title="Java 物件導向進階">
+        <div class="tags-list-item">Java 物件導向進階</div>
+      </a>
+    
+      <a 
+        href="/tags/List/" 
+        title="List">
+        <div class="tags-list-item">List</div>
+      </a>
+    
+      <a 
+        href="/tags/Java%E9%97%9C%E9%8D%B5%E5%AD%97/" 
+        title="Java關鍵字">
+        <div class="tags-list-item">Java關鍵字</div>
+      </a>
+    
+      <a 
+        href="/tags/Java%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/" 
+        title="Java流程控制">
+        <div class="tags-list-item">Java流程控制</div>
+      </a>
+    
+      <a 
+        href="/tags/Set/" 
+        title="Set">
+        <div class="tags-list-item">Set</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-IO/" 
+        title="Java IO">
+        <div class="tags-list-item">Java IO</div>
+      </a>
+    
+      <a 
+        href="/tags/Java%E9%81%8B%E7%AE%97/" 
+        title="Java運算">
+        <div class="tags-list-item">Java運算</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-%E7%95%B0%E5%B8%B8/" 
+        title="Java 異常">
+        <div class="tags-list-item">Java 異常</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E5%9F%BA%E7%A4%8E/" 
+        title="Java 物件導向基礎">
+        <div class="tags-list-item">Java 物件導向基礎</div>
+      </a>
+    
+      <a 
+        href="/tags/Java%E6%96%B9%E6%B3%95/" 
+        title="Java方法">
+        <div class="tags-list-item">Java方法</div>
+      </a>
+    
+      <a 
+        href="/tags/Map/" 
+        title="Map">
+        <div class="tags-list-item">Map</div>
+      </a>
+    
+      <a 
+        href="/tags/Collection/" 
+        title="Collection">
+        <div class="tags-list-item">Collection</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-%E6%B3%9B%E5%9E%8B/" 
+        title="Java 泛型">
+        <div class="tags-list-item">Java 泛型</div>
+      </a>
+    
+      <a 
+        href="/tags/Java%E9%99%A3%E5%88%97/" 
+        title="Java陣列">
+        <div class="tags-list-item">Java陣列</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-%E5%8F%8D%E5%B0%84/" 
+        title="Java 反射">
+        <div class="tags-list-item">Java 反射</div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+            <main class="main-column">
+              
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      Spring
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2023-08-31T16:00:00.000Z">
+      <i 
+        class="iconfont icon-calendar" 
+        style="margin-right: 2px;">
+      </i>
+      <span>2023-09-01</span>
+    </time>
+    
+      <span class="dot"></span>
+      
+        <a 
+          href="/categories/Spring-%E6%A1%86%E6%9E%B6/" 
+          class="post-meta-link">
+          Spring 框架
+        </a>
+      
+    
+    
+      <span class="dot"></span>
+      <span>2.5k 個字</span>
+    
+  </div>
+  
+    <div 
+      class="post-meta post-show-meta" 
+      style="margin-top: -10px;">
+      <div style="display: flex; align-items: center;">
+        <i 
+          class="iconfont icon-biaoqian" 
+          style="margin-right: 2px; font-size: 1.15rem;">
+        </i>
+        
+          
+          <a 
+            href="/tags/%E7%AD%86%E8%A8%98/" 
+            class="post-meta-link">
+            筆記
+          </a>
+        
+      </div>
+    </div>
+  
+  </header>
+  <div 
+    id="section" 
+    class="post-content">
+    <p>Spring Framework<br>Spring Boot<br>開始學習 Spring Boot，可以通過閱讀官方文件、網上教程或參加相關的課程。了解 Spring Boot 的基本概念、核心功能以及快速建立應用程式的能力。  </p>
+<ol start="4">
+<li><p>應用程式配置<br>瞭解如何在 Spring Boot 應用程式中進行配置。學習如何使用屬性檔案 (application.properties 或 application.yml) 來設定應用程式的屬性。  </p>
+</li>
+<li><p>控制器和 RESTful API<br>學習如何使用 Spring Boot 創建控制器並實現 RESTful API。瞭解請求映射、HTTP 方法處理以及回應的處理。  </p>
+</li>
+<li><p>整合資料庫<br>學習如何在 Spring Boot 中整合資料庫。使用 Spring Data JPA 或其他資料庫整合技術進行資料存取。  </p>
+</li>
+<li><p>安全性<br>瞭解如何使用 Spring Security 來實施身分驗證和授權，以確保應用程式的安全性。  </p>
+</li>
+<li><p>測試<br>學習如何撰寫單元測試和整合測試，以確保應用程式的正確運作。  </p>
+</li>
+<li><p>樣板引擎和前端整合<br>瞭解如何使用 Thymeleaf 或其他樣板引擎來處理前端視圖，並與前端框架整合。  </p>
+</li>
+<li><p>Actuator 和監控<br>學習如何使用 Spring Boot Actuator 監控和管理應用程式，收集應用程式的運行時資訊。  </p>
+</li>
+<li><p>部署和容器化<br>學習如何將 Spring Boot 應用程式部署到不同的環境，包括本地伺服器、雲端服務、容器等。  </p>
+</li>
+<li><p>進階主題<br>深入學習 Spring Boot 的進階主題，例如使用 Spring Cloud 來實現微服務架構、性能優化、安全性進階等。  </p>
+</li>
+<li><p>實作專案<br>最好的學習方式是通過實際專案來應用之前所學的知識。將所學的技能應用到實際場景中，並持續進行實作和練習。</p>
+</li>
+</ol>
+<p>最後，不要忘記通過閱讀官方文件、參加社群活動、訂閱部落格、觀看教學影片等來不斷更新您的知識，因為 Spring Boot 生態系統和技術都在不斷發展。祝您在學習 Spring Boot 的過程中取得成功！  </p>
+<p>Spring Framework 是一個在 Java 平台上建立的，開源應用程式框架。它提供了一系列強大並具有靈活性的工具和功能，以簡化開發企業級應用程式。  </p>
+<p>核心特性  </p>
+<p>控制反轉 (Inversion of Control, IoC)：<br>IoC 是 Spring Framework 最重要的特性之一。它通過將對象的創建和依賴注入的責任轉移到容器中，而不是由應用程式自己來創建和管理對象，使得應用程式更容易擴展和測試。  </p>
+<p>在傳統的程式設計中，一個類別通常會直接創建其他類別的實例，並在自己的方法中控制對這些實例的操作。這樣的設計方式會導致類別之間產生高度的耦合性，使得程式碼難以重用、測試和維護。  </p>
+<p>而 IoC 的概念就是顛覆這種傳統的程式設計模式。在 IoC 中，對象的創建和依賴注入由外部容器負責，而被創建的對象不再負責管理它所依賴的其他對象。  </p>
+<p>IoC 的主要原理：  </p>
+<p>外部容器：在 IoC 中，我們使用一個外部容器（通常是框架或容器）來負責管理對象的創建和依賴關係的注入。在 Spring Framework 中，這個容器通常被稱為 ApplicationContext。  </p>
+<p>創建對象：當應用程式啟動時，外部容器讀取配置檔案或註解，根據配置信息創建所需的對象。這些對象通常被稱為 Bean。  </p>
+<p>依賴注入：IoC 的另一個核心概念是依賴注入（Dependency Injection，DI）。當一個對象需要使用另一個對象時，不再由自己創建這個依賴對象，而是由外部容器注入。這樣，對象之間的依賴關係被解耦，實現了類別之間的低耦合性。  </p>
+<p>生命週期管理：外部容器也負責管理 Bean 的生命週期，即創建、初始化、使用和銷毀。開發者只需要聲明所需的 Bean，容器會負責執行這些生命週期的方法。  </p>
+<p>優點：<br>解耦合：<br>IoC 降低了類別之間的耦合性，使得它們更容易獨立地開發、測試和維護。  </p>
+<p>可替換性：<br>由於依賴關係被注入，我們可以在不修改原始程式碼的情況下，輕鬆地替換依賴的實現，從而實現程式碼的靈活性和可擴展性。  </p>
+<p>簡化設計：<br>IoC 讓開發者專注於核心邏輯，而不需要擔心對象的創建和管理，使得程式碼更加簡潔和易於理解。  </p>
+<p>Spring Framework 通過採用 IoC 設計，將對象的控制權交給 Spring 容器，稱為 ApplicationContext。當應用程式啟動時，Spring 容器會讀取配置檔案或註解，創建並管理所有所需的對象。開發者只需在程式碼中聲明需要注入的依賴，Spring 容器會自動解析和注入所需的對象。  </p>
+<p>常見的 IoC 實現方式有：依賴注入（Dependency Injection，DI）和事件驅動（Event Driven）。依賴注入是 Spring Framework 最常用的 IoC 實現方式。  </p>
+<p>依賴注入 (Dependency Injection, DI)：<br>DI 是 IoC 的一種實現方式，它通過將一個對象的依賴關係交給容器來管理。這使得類之間的關係更加鬆散，使得代碼更加容易重用和測試。  </p>
+<p>依賴注入（Dependency Injection，簡稱 DI）是一種設計模式，用於解決物件之間的依賴關係。在依賴注入模式中，一個物件不再負責自己創建或管理它所依賴的其他物件，而是由外部容器（通常是框架或容器）負責將這些依賴物件注入到目標物件中。這樣做的目的是減少類別之間的耦合，提高程式碼的靈活性、可維護性和可測試性。  </p>
+<p>依賴注入有三種主要的形式：  </p>
+<p>建構子注入（Constructor Injection）：透過類別的建構子來注入依賴物件。當目標類別被建立時，它的建構子被呼叫，並將所需的依賴物件作為參數傳遞進來。  </p>
+<p>屬性注入（Setter Injection）：通過 setter 方法來注入依賴物件。目標類別擁有一個或多個 setter 方法，用於設定依賴物件。  </p>
+<p>介面注入（Interface Injection）：透過介面來注入依賴物件。目標類別實現一個介面，該介面定義了一個方法用於設定依賴物件。  </p>
+<p>依賴注入的優點：  </p>
+<p>降低耦合：依賴注入降低了類別之間的耦合，使得它們更容易獨立地開發、測試和維護。  </p>
+<p>可替換性：由於依賴物件被注入，我們可以在不修改原始程式碼的情況下，輕鬆地替換依賴的實現，從而實現程式碼的靈活性和可擴展性。  </p>
+<p>測試容易：依賴物件可以被輕鬆地模擬或替換，使得進行單元測試變得容易。  </p>
+<p>簡化設計：依賴注入讓開發者專注於核心邏輯，而不需要擔心對象的創建和管理，使得程式碼更加簡潔和易於理解。  </p>
+<p>Spring Framework 是一個廣泛使用依賴注入的框架。在 Spring 中，我們可以通過註解或 XML 配置的方式來實現依賴注入，使得開發和配置更加靈活和方便。依賴注入是 Spring 的核心特性之一，它使 Spring 成為一個非常受歡迎的 Java 開發框架。  </p>
+<p>面向切面程式設計 (Aspect-Oriented Programming, AOP)：<br>AOP 是一種程式設計的方法，允許您將應用程式的關注點（例如日誌記錄、安全性、事務管理）從主要業務邏輯中分離出來。Spring 提供了 AOP 支持，使得開發者可以更好地管理橫切關注點。  </p>
+<ol start="2">
+<li>模組化<br>Spring Framework 是一個模組化的框架，它被拆分為多個獨立的模組。每個模組都專注於不同的功能，這樣您可以根據項目的需求選擇性地使用它們。一些主要的模組包括：</li>
+</ol>
+<p>Spring Core Container：提供 IoC 和 DI 的核心功能。<br>Spring AOP：提供面向切面程式設計的支持。<br>Spring JDBC：提供對 JDBC（Java Database Connectivity）的支持，簡化了資料庫操作。<br>Spring ORM：提供對不同 ORM 框架（如 Hibernate、JPA）的支持，簡化了對資料庫的存取。<br>Spring Web：提供 Web 應用程式開發的支持，包括控制器、視圖解析、表單處理等。<br>Spring Test：提供單元測試和整合測試的支持，幫助開發者測試應用程式。<br>3. 整合性<br>Spring Framework 提供了對許多常見的框架和技術的整合性支持，例如：  </p>
+<p>整合 Hibernate、JPA、MyBatis 等 ORM 框架，使得資料庫存取更為容易。<br>整合 Spring Security，提供安全性和身分驗證的解決方案。<br>整合 RESTful Web 服務，使得建立 RESTful API 更加容易。<br>4. 資源管理<br>Spring Framework 提供了對資源的管理，例如註冊和查找 Bean、資源檔案的加載、資源的讀取和解析等。  </p>
+<ol start="5">
+<li><p>支持多種開發方式<br>Spring Framework 支持傳統的 Java EE 開發方式，也支持使用 Servlet、JSP 和 XML 配置的傳統 Web 開發方式。同時，它也支持使用注解和 JavaConfig 的方式進行配置，使得開發更加現代和便捷。  </p>
+</li>
+<li><p>豐富的社群和資源<br>Spring Framework 擁有豐富的社群和資源，包括官方文檔、教學影片、示例程式碼、社群論壇等。這些資源可以幫助開發者學習和解決問題。</p>
+</li>
+</ol>
+<p>總結來說，Spring Framework 是一個功能強大且廣泛使用的 Java 應用程式框架，它提供了許多功能，幫助開發者更容易地建立企業級應用程式。它的靈活性和模組化設計使得它適用於各種不同的項目和開發需求。  </p>
+
+  </div>
+  <div>
+    
+      <div 
+        class="post-note note-warning copyright" 
+        style="margin-top: 42px">
+        <p>
+          <span style="font-weight: bold;">作者：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="/about">
+            Frederic_Ng
+          </a>
+        </p>
+        <p>
+          <span style="font-weight: bold;">文章链接：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="http://example.com/2023/09/01/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/Spring%E6%A1%86%E6%9E%B6/Spring/%E7%AD%86%E8%A8%98/Spring/">
+            http://example.com/2023/09/01/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/Spring%E6%A1%86%E6%9E%B6/Spring/%E7%AD%86%E8%A8%98/Spring/
+          </a>
+        </p>
+        <p><span style="font-weight: bold;">版权声明：</span>本部落格的所有文章，除特別聲明外，均採用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 協議</a>。轉載請標注出處！</p>
+      </div>
+    
+  </div>
+</article>
+<div class="nav">
+  
+    <div class="nav-item-prev">
+      <a 
+        href="/2023/09/01/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/Spring%E6%A1%86%E6%9E%B6/Spring/%E7%AD%86%E8%A8%98/Spring%20%E7%B0%A1%E4%BB%8B/" 
+        class="nav-link">
+        <i class="iconfont icon-left nav-prev-icon"></i>
+        <div>
+          <div class="nav-label">上一篇</div>
+          
+            <div class="nav-title">Spring 簡介 </div>
+          
+        </div>
+      </a>
+    </div>
+  
+  
+    <div class="nav-item-next">
+      <a 
+        href="/2023/09/01/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/Spring%E6%A1%86%E6%9E%B6/Spring%20boot/%E7%AD%86%E8%A8%98/Spring%20Boot%20%E5%AD%B8%E7%BF%92%E8%B7%AF%E7%B7%9A/" 
+        class="nav-link">
+        <div>
+          <div class="nav-label">下一篇</div>
+          
+            <div class="nav-title">Spring Boot 學習路線 </div>
+          
+        </div>
+        <i class="iconfont icon-right nav-next-icon"></i>
+      </a>
+    </div>
+  
+</div>
+
+<div 
+  class="card card-content toc-card" 
+  id="mobiletoc">
+  <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目錄
+</div>
+
+</div>
+            </main>
+            <aside class="right-column">
+              <div class="sticky-widescreen">
+  
+  
+    <article class="card card-content toc-card">
+      <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目錄
+</div>
+
+    </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header">
+    <i 
+      class="iconfont icon-wenzhang_huaban" 
+      style="padding-right: 2px;">
+    </i>最新文章
+  </div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-09-06</div>
+        <a href="/2023/09/06/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/%E6%95%B8%E6%93%9A%E5%BA%AB/ORM%E6%A1%86%E6%9E%B6/MyBatis/%E7%AD%86%E8%A8%98/MyBatis%20%E7%B5%90%E6%9E%9C%E9%9B%86%E7%9A%84%E6%98%A0%E5%B0%84/"><div class="recent-posts-item-content">MyBatis 結果集的映射</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-09-06</div>
+        <a href="/2023/09/06/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/%E6%95%B8%E6%93%9A%E5%BA%AB/ORM%E6%A1%86%E6%9E%B6/MyBatis/%E7%AD%86%E8%A8%98/MyBatis%20%E7%B7%A9%E5%AD%98/"><div class="recent-posts-item-content">MyBatis 緩存</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-09-05</div>
+        <a href="/2023/09/05/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/%E6%95%B8%E6%93%9A%E5%BA%AB/ORM%E6%A1%86%E6%9E%B6/MyBatis/%E7%AD%86%E8%A8%98/MyBatic%20%E5%88%86%E9%A0%81%E6%8F%92%E4%BB%B6/"><div class="recent-posts-item-content">MyBatic 分頁插件</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-09-05</div>
+        <a href="/2023/09/05/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/%E6%95%B8%E6%93%9A%E5%BA%AB/ORM%E6%A1%86%E6%9E%B6/MyBatis/%E7%AD%86%E8%A8%98/MyBatis%20Genarator/"><div class="recent-posts-item-content">MyBatis Genarator</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+     
+    <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>
+          Copyright ©
+          
+            2020
+          
+          
+                - 
+                2023
+          
+        </span>
+        &nbsp;
+        <a 
+          href="/" 
+          class="footer-link">
+          Frederic的技術學習筆記
+        </a>
+      </div>
+    </div>
+
+    
+      <div class="footer-dsc">
+        
+          Powered by
+          <a 
+            href="https://hexo.io/" 
+            class="footer-link" 
+            target="_blank" 
+            rel="nofollow noopener noreferrer">
+            &nbsp;Hexo
+          </a>
+        
+        
+          <span>&nbsp;|&nbsp;</span>
+        
+        
+          Theme -
+          <a 
+            href="https://github.com/theme-kaze" 
+            class="footer-link" 
+            target="_blank"
+            rel="nofollow noopener noreferrer">
+            &nbsp;Kaze
+          </a>
+        
+      </div>
+    
+    
+    
+    
+</footer>
+ 
+    
+  <a 
+    role="button" 
+    id="scrollbutton" 
+    class="basebutton" 
+    aria-label="回到顶部">
+    <i class="iconfont icon-arrowleft button-icon"></i>
+  </a>
+
+<a 
+  role="button" 
+  id="menubutton"
+  aria-label="menu button"
+  class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="popbutton" 
+  class="basebutton" 
+  aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="darkbutton" 
+  class="basebutton darkwidget" 
+  aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="searchbutton" 
+  class="basebutton searchwidget" 
+  aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a> 
+     
+     
+     
+      <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img')
+    var i
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a')
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'))
+      wrapper.setAttribute('aria-label', 'illustration')
+      wrapper.style.cssText =
+        'width: 100%; display: flex; justify-content: center;'
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt
+      wrapper.dataset.nolink = true
+      img[i].before(wrapper)
+      wrapper.append(img[i])
+      var divWrap = document.createElement('div')
+      divWrap.classList.add('gallery')
+      wrapper.before(divWrap)
+      divWrap.append(wrapper)
+    }
+    baguetteBox.run('.gallery')
+  }
+</script>
+<script>
+  loadScript(
+    "/js/lib/lightbox/baguetteBox.min.js",
+    addImgLayout
+  )
+</script>
+ 
+     
+     
+    <script src="/js/main.js"></script> 
+     
+    
+      <script>
+        var addLazyload = function () {
+          var observer = lozad('.lozad', {
+            load: function (el) {
+              el.srcset = el.getAttribute('data-src')
+            },
+            loaded: function (el) {
+              el.classList.add('loaded')
+            },
+          })
+          observer.observe()
+        }
+      </script>
+      <script>
+        loadScript('/js/lib/lozad.min.js', addLazyload)
+      </script>
+    
+    <script src="//instant.page/5.1.0" type="module"
+      integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"></script>
+    
+    
+  </body>
+</html>

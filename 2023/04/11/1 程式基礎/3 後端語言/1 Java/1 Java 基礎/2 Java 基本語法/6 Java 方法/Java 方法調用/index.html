@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+  <meta charset="UTF-8">
+  <meta 
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta 
+    http-equiv="X-UA-Compatible" 
+    content="ie=edge">
+  <meta 
+    name="theme-color" 
+    content="#fff" 
+    id="theme-color">
+  <meta 
+    name="description" 
+    content="Hexo">
+  <link 
+    rel="icon" 
+    href="https://img.songhn.com/img/Y67gdd.png">
+  <title>Java 方法調用</title>
+  
+    
+      <meta 
+        property="og:title" 
+        content="Java 方法調用">
+    
+    
+      <meta 
+        property="og:url" 
+        content="http://example.com/2023/04/11/1%20%E7%A8%8B%E5%BC%8F%E5%9F%BA%E7%A4%8E/3%20%E5%BE%8C%E7%AB%AF%E8%AA%9E%E8%A8%80/1%20Java/1%20Java%20%E5%9F%BA%E7%A4%8E/2%20Java%20%E5%9F%BA%E6%9C%AC%E8%AA%9E%E6%B3%95/6%20Java%20%E6%96%B9%E6%B3%95/Java%20%E6%96%B9%E6%B3%95%E8%AA%BF%E7%94%A8/index.html">
+    
+    
+      <meta 
+        property="og:img" 
+        content="/img/profile.png">
+    
+    
+    
+      <meta 
+        property="og:type" 
+        content="article">
+      <meta 
+        property="og:article:published_time" 
+        content="2023-04-11">
+      <meta 
+        property="og:article:modified_time" 
+        content="2023-08-23">
+      <meta 
+        property="og:article:author" 
+        content="Frederic_Ng">
+      
+        
+          <meta 
+            property="og:article:tag" 
+            content="Java方法">
+        
+      
+    
+  
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  <link rel="preload" href="/css/main.css" as="style" >
+  
+  <link rel="modulepreload" href="//instant.page/5.1.0">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+  
+  
+  
+    <link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+  
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+    function loadCSS(href, data, attr) {
+      var sheet = document.createElement('link');
+      sheet.ref = 'stylesheet';
+      sheet.href = href;
+      sheet.dataset[data] = attr;
+      document.head.appendChild(sheet);
+    }
+    function changeCSS(cssFile, data, attr) {
+      var oldlink = document.querySelector(data);
+      var newlink = document.createElement("link");
+      newlink.setAttribute("rel", "stylesheet");
+      newlink.setAttribute("href", cssFile);
+      newlink.dataset.prism = attr;
+      document.head.replaceChild(newlink, oldlink);
+    }
+  </script>
+  
+    
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+  </script>
+  
+    <script>
+      var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+        document.getElementById('theme-color').dataset.mode = getCssMediaQuery();
+      }
+    };
+    setDarkmode();
+    </script>
+  
+  
+  
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+    <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <div class="wrapper">
+       
+      <nav class="navbar">
+  <div class="navbar-logo">
+    <a class="navbar-logo-main" href="/">
+      
+        <img 
+          class="navbar-logo-img"
+          width="32"
+          height="32"
+          src="https://img.songhn.com/img/Y67gdd.png" 
+          alt="blog logo">
+      
+      <span class="navbar-logo-dsc">Frederic的技術學習筆記</span>
+      </a>
+  </div>
+  <div class="navbar-menu">
+    
+      <a 
+        href="/" 
+        class="navbar-menu-item">
+        
+          首頁
+        
+      </a>
+    
+      <a 
+        href="/archives" 
+        class="navbar-menu-item">
+        
+          存檔
+        
+      </a>
+    
+      <a 
+        href="/tags" 
+        class="navbar-menu-item">
+        
+          標籤
+        
+      </a>
+    
+      <a 
+        href="/categories" 
+        class="navbar-menu-item">
+        
+          分類
+        
+      </a>
+    
+      <a 
+        href="/about" 
+        class="navbar-menu-item">
+        
+          關於
+        
+      </a>
+    
+      <a 
+        href="/links" 
+        class="navbar-menu-item">
+        
+          友鏈
+        
+      </a>
+    
+    <button 
+      class="navbar-menu-item darknavbar navbar-menu-btn" 
+      aria-label="Toggle dark mode"
+      id="dark">
+      <i class="iconfont icon-weather"></i>
+    </button>
+    <button 
+      class="navbar-menu-item searchnavbar navbar-menu-btn" 
+      aria-label="Toggle search"
+      id="search">
+      <!-- <i 
+        class="iconfont icon-search" 
+        style="font-size: 1.2rem; font-weight: 400;">
+      </i> -->
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+        class="iconify iconify--ion" width="28" height="28" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512">
+        <path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="28"
+          d="M256 80a176 176 0 1 0 176 176A176 176 0 0 0 256 80Z"></path>
+        <path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="28"
+          d="M232 160a72 72 0 1 0 72 72a72 72 0 0 0-72-72Z"></path>
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="28"
+          d="M283.64 283.64L336 336"></path>
+      </svg>
+    </button>
+  </div>
+</nav> 
+      
+      <div 
+        id="local-search" 
+        style="display: none">
+        <input
+          class="navbar-menu-item"
+          id="search-input"
+          placeholder="请输入搜索内容..." />
+        <div id="search-content"></div>
+      </div>
+      
+      <div class="section-wrap">
+        <div class="container">
+          <div class="columns">
+            <aside class="left-column">
+              
+              <div class="card card-author">
+                
+  <img 
+    src="/img/profile.png" 
+    class="author-img"
+    width="88"
+    height="88"
+    alt="author avatar">
+
+<p class="author-name">Frederic_Ng</p>
+<p class="author-description">立志成為軟體工程師的文科生</p>
+<div class="author-message">
+  <a 
+    class="author-posts-count" 
+    href="/archives">
+    <span>177</span>
+    <span>文章</span>
+  </a>
+  <a 
+    class="author-categories-count" 
+    href="/categories">
+    <span>10</span>
+    <span>分類</span>
+  </a>
+  <a 
+    class="author-tags-count" 
+    href="/tags">
+    <span>22</span>
+    <span>標籤</span>
+  </a>
+</div>
+
+  <div class="author-card-society">
+    
+      <div class="author-card-society-icon">
+        <a target="_blank" rel="noopener" href="https://github.com/kysfans">
+          <i class="iconfont icon-github society-icon"></i>
+        </a>
+      </div>
+    
+  </div>
+
+              </div>
+               <div class="sticky-tablet">
+  
+  
+    <article class="display-when-two-columns spacer">
+      <div class="card card-content toc-card">
+        <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目錄
+</div>
+
+      </div>
+    </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header">
+    <i 
+      class="iconfont icon-fenlei" 
+      style="padding-right: 2px;">
+    </i>分類
+  </div>
+  <div class="categories-list">
+    
+      <a href="/categories/%E7%A8%8B%E5%BA%8F%E8%A8%AD%E8%A8%88/">
+        <div class="categories-list-item">
+          程序設計
+          <span class="categories-list-item-badge">6</span>
+        </div>
+      </a>
+    
+      <a href="/categories/CMD/">
+        <div class="categories-list-item">
+          CMD
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E6%95%B8%E6%93%9A%E5%BA%AB/">
+        <div class="categories-list-item">
+          數據庫
+          <span class="categories-list-item-badge">9</span>
+        </div>
+      </a>
+    
+      <a href="/categories/JAVA%E7%B0%A1%E4%BB%8B/">
+        <div class="categories-list-item">
+          JAVA簡介
+          <span class="categories-list-item-badge">9</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Spring-%E6%A1%86%E6%9E%B6/">
+        <div class="categories-list-item">
+          Spring-框架
+          <span class="categories-list-item-badge">9</span>
+        </div>
+      </a>
+    
+      <a href="/categories/JAVA%E5%9F%BA%E6%9C%AC%E8%AA%9E%E6%B3%95/">
+        <div class="categories-list-item">
+          JAVA基本語法
+          <span class="categories-list-item-badge">23</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Java%E5%9F%BA%E6%9C%AC%E8%AA%9E%E6%B3%95/">
+        <div class="categories-list-item">
+          Java基本語法
+          <span class="categories-list-item-badge">22</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Java%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91/">
+        <div class="categories-list-item">
+          Java物件導向
+          <span class="categories-list-item-badge">24</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Java%E5%85%B6%E4%BB%96%E6%A6%82%E5%BF%B5/">
+        <div class="categories-list-item">
+          Java其他概念
+          <span class="categories-list-item-badge">62</span>
+        </div>
+      </a>
+    
+      <a href="/categories/ORM%E6%A1%86%E6%9E%B6/">
+        <div class="categories-list-item">
+          ORM框架
+          <span class="categories-list-item-badge">12</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header">
+    <i 
+      class="iconfont icon-biaoqian" 
+      style="padding-right: 2px;">
+    </i>熱門標籤
+  </div>
+  <div class="tags-list">
+    
+      <a 
+        href="/tags/%E7%AD%86%E8%A8%98/" 
+        title="筆記">
+        <div class="tags-list-item">筆記</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E9%80%B2%E9%9A%8E/" 
+        title="Java 物件導向進階">
+        <div class="tags-list-item">Java 物件導向進階</div>
+      </a>
+    
+      <a 
+        href="/tags/List/" 
+        title="List">
+        <div class="tags-list-item">List</div>
+      </a>
+    
+      <a 
+        href="/tags/Java%E9%97%9C%E9%8D%B5%E5%AD%97/" 
+        title="Java關鍵字">
+        <div class="tags-list-item">Java關鍵字</div>
+      </a>
+    
+      <a 
+        href="/tags/Java%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/" 
+        title="Java流程控制">
+        <div class="tags-list-item">Java流程控制</div>
+      </a>
+    
+      <a 
+        href="/tags/Set/" 
+        title="Set">
+        <div class="tags-list-item">Set</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-IO/" 
+        title="Java IO">
+        <div class="tags-list-item">Java IO</div>
+      </a>
+    
+      <a 
+        href="/tags/Java%E9%81%8B%E7%AE%97/" 
+        title="Java運算">
+        <div class="tags-list-item">Java運算</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-%E7%95%B0%E5%B8%B8/" 
+        title="Java 異常">
+        <div class="tags-list-item">Java 異常</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E5%9F%BA%E7%A4%8E/" 
+        title="Java 物件導向基礎">
+        <div class="tags-list-item">Java 物件導向基礎</div>
+      </a>
+    
+      <a 
+        href="/tags/Java%E6%96%B9%E6%B3%95/" 
+        title="Java方法">
+        <div class="tags-list-item">Java方法</div>
+      </a>
+    
+      <a 
+        href="/tags/Map/" 
+        title="Map">
+        <div class="tags-list-item">Map</div>
+      </a>
+    
+      <a 
+        href="/tags/Collection/" 
+        title="Collection">
+        <div class="tags-list-item">Collection</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-%E6%B3%9B%E5%9E%8B/" 
+        title="Java 泛型">
+        <div class="tags-list-item">Java 泛型</div>
+      </a>
+    
+      <a 
+        href="/tags/Java%E9%99%A3%E5%88%97/" 
+        title="Java陣列">
+        <div class="tags-list-item">Java陣列</div>
+      </a>
+    
+      <a 
+        href="/tags/Java-%E5%8F%8D%E5%B0%84/" 
+        title="Java 反射">
+        <div class="tags-list-item">Java 反射</div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+            <main class="main-column">
+              
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      Java 方法調用
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2023-04-11T04:40:53.000Z">
+      <i 
+        class="iconfont icon-calendar" 
+        style="margin-right: 2px;">
+      </i>
+      <span>2023-04-11</span>
+    </time>
+    
+      <span class="dot"></span>
+      
+        <a 
+          href="/categories/Java%E5%9F%BA%E6%9C%AC%E8%AA%9E%E6%B3%95/" 
+          class="post-meta-link">
+          Java基本語法
+        </a>
+      
+    
+    
+      <span class="dot"></span>
+      <span>1.1k 個字</span>
+    
+  </div>
+  
+    <div 
+      class="post-meta post-show-meta" 
+      style="margin-top: -10px;">
+      <div style="display: flex; align-items: center;">
+        <i 
+          class="iconfont icon-biaoqian" 
+          style="margin-right: 2px; font-size: 1.15rem;">
+        </i>
+        
+          
+          <a 
+            href="/tags/Java%E6%96%B9%E6%B3%95/" 
+            class="post-meta-link">
+            Java方法
+          </a>
+        
+      </div>
+    </div>
+  
+  </header>
+  <div 
+    id="section" 
+    class="post-content">
+    <p>在Java中，方法的调用是通过方法名和参数列表来执行的。方法可以在同一个类中被调用，也可以在不同的类中被调用。调用方法时，需要提供方法名和对应的参数列表，以便方法能够执行相应的任务或返回值。  </p>
+<p>方法调用的一般语法如下：  </p>
+<pre><code class="java">returnType methodName(parameterType1 parameter1, parameterType2 parameter2, ...) &#123;  
+    // 方法体  
+    // 方法执行的代码  
+    // 可能包含 return 语句返回值  
+&#125;  
+</code></pre>
+<p>在上述语法中：  </p>
+<ul>
+<li><code>returnType</code>：表示方法的返回类型，即方法执行后返回的数据类型。如果方法没有返回值，则返回类型使用关键字 <code>void</code>。  </li>
+<li><code>methodName</code>：表示方法的名称，用来唯一标识一个方法。  </li>
+<li><code>parameterType1, parameterType2, ...</code>：表示方法的参数类型，即方法执行时需要传入的数据类型。  </li>
+<li><code>parameter1, parameter2, ...</code>：表示方法的参数，即方法执行时传入的实际值。</li>
+</ul>
+<p>当调用一个方法时，需要按照方法签名（方法名和参数列表）来匹配方法。方法签名唯一标识了一个方法，如果方法名和参数列表与某个已定义的方法匹配，就会调用该方法。如果在当前类中找不到匹配的方法，编译器将在父类或接口中查找匹配的方法。  </p>
+<p>下面是一个简单的示例来演示如何调用一个方法：  </p>
+<pre><code class="java">public class Main &#123;  
+    public static void main(String[] args) &#123;  
+        int a = 5;  
+        int b = 10;  
+        int sum = addNumbers(a, b); // 调用方法addNumbers，并传入参数a和b  
+        System.out.println(&quot;Sum: &quot; + sum);  
+    &#125;  
+      
+    // 定义一个方法addNumbers，用于将两个整数相加并返回结果  
+    public static int addNumbers(int x, int y) &#123;  
+        return x + y;  
+    &#125;  
+&#125;  
+</code></pre>
+<p>在这个示例中，我们定义了一个名为<code>addNumbers</code>的方法，它接收两个整数参数 <code>x</code> 和 <code>y</code>，并返回它们的和。在<code>main</code>方法中，我们调用<code>addNumbers</code>方法并传入两个整数值 <code>a</code> 和 <code>b</code>，然后将返回的结果赋给 <code>sum</code> 变量，并将结果打印输出。  </p>
+<p>注意：在Java中，方法调用可以递归地进行，即方法可以调用自身，这就是所谓的递归方法。在使用递归方法时，需要小心避免陷入无限循环，确保递归调用在合适的条件下终止。  </p>
+<p>在Java中，非静态方法（也称为实例方法）是对象级别的方法，必须通过对象来调用。这些方法属于类的实例，因此在调用非静态方法之前，必须先创建类的对象。  </p>
+<p>非静态方法可以访问和操作对象的实例变量，这使得它们适合于执行与对象状态相关的操作。要调用非静态方法，需要遵循以下步骤：  </p>
+<ol>
+<li><p><strong>创建对象：</strong> 首先，必须创建类的一个对象。这可以通过使用<code>new</code>关键字调用类的构造方法来完成。  </p>
+</li>
+<li><p><strong>调用方法：</strong> 使用创建的对象来调用非静态方法。方法调用的语法是：<code>objectName.methodName(arguments)</code>，其中<code>objectName</code>是对象的引用，<code>methodName</code>是要调用的方法名，<code>arguments</code>是传递给方法的参数（如果有）。</p>
+</li>
+</ol>
+<p>下面是一个示例，演示如何调用一个非静态方法：  </p>
+<pre><code class="java">public class Person &#123;  
+    private String name;  
+  
+    // 构造方法  
+    public Person(String name) &#123;  
+        this.name = name;  
+    &#125;  
+  
+    // 非靜態方法  
+    public void greet() &#123;  
+        System.out.println(&quot;Hello, my name is &quot; + name);  
+    &#125;  
+  
+    public static void main(String[] args) &#123;  
+        Person person = new Person(&quot;Alice&quot;); // 创建Person对象  
+        person.greet(); // 调用非静态方法greet()  
+    &#125;  
+&#125;  
+</code></pre>
+<p>在上述示例中，我们定义了一个<code>Person</code>类，其中包含一个非静态方法<code>greet()</code>。在<code>main</code>方法中，我们先创建一个<code>Person</code>对象<code>person</code>，然后通过<code>person.greet()</code>调用<code>greet()</code>方法。  </p>
+<p>需要注意的是，非静态方法只有在对象创建之后才能被调用。如果尝试在类中的静态方法或静态上下文中调用非静态方法，将会导致编译错误。因为静态方法不依赖于任何对象实例，所以不能在其中直接调用非静态方法。如果希望在静态方法中使用非静态方法，需要先创建对象，并通过对象引用来调用非静态方法。  </p>
+<p>总结来说，非静态方法是属于类的实例的方法，在调用它们之前需要先创建类的对象，并通过对象来调用方法。  </p>
+
+  </div>
+  <div>
+    
+      <div 
+        class="post-note note-warning copyright" 
+        style="margin-top: 42px">
+        <p>
+          <span style="font-weight: bold;">作者：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="/about">
+            Frederic_Ng
+          </a>
+        </p>
+        <p>
+          <span style="font-weight: bold;">文章链接：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="http://example.com/2023/04/11/1%20%E7%A8%8B%E5%BC%8F%E5%9F%BA%E7%A4%8E/3%20%E5%BE%8C%E7%AB%AF%E8%AA%9E%E8%A8%80/1%20Java/1%20Java%20%E5%9F%BA%E7%A4%8E/2%20Java%20%E5%9F%BA%E6%9C%AC%E8%AA%9E%E6%B3%95/6%20Java%20%E6%96%B9%E6%B3%95/Java%20%E6%96%B9%E6%B3%95%E8%AA%BF%E7%94%A8/">
+            http://example.com/2023/04/11/1%20%E7%A8%8B%E5%BC%8F%E5%9F%BA%E7%A4%8E/3%20%E5%BE%8C%E7%AB%AF%E8%AA%9E%E8%A8%80/1%20Java/1%20Java%20%E5%9F%BA%E7%A4%8E/2%20Java%20%E5%9F%BA%E6%9C%AC%E8%AA%9E%E6%B3%95/6%20Java%20%E6%96%B9%E6%B3%95/Java%20%E6%96%B9%E6%B3%95%E8%AA%BF%E7%94%A8/
+          </a>
+        </p>
+        <p><span style="font-weight: bold;">版权声明：</span>本部落格的所有文章，除特別聲明外，均採用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 協議</a>。轉載請標注出處！</p>
+      </div>
+    
+  </div>
+</article>
+<div class="nav">
+  
+    <div class="nav-item-prev">
+      <a 
+        href="/2023/04/11/1%20%E7%A8%8B%E5%BC%8F%E5%9F%BA%E7%A4%8E/3%20%E5%BE%8C%E7%AB%AF%E8%AA%9E%E8%A8%80/1%20Java/1%20Java%20%E5%9F%BA%E7%A4%8E/2%20Java%20%E5%9F%BA%E6%9C%AC%E8%AA%9E%E6%B3%95/6%20Java%20%E6%96%B9%E6%B3%95/Java%20%E9%9D%9C%E6%85%8B%E6%96%B9%E6%B3%95/" 
+        class="nav-link">
+        <i class="iconfont icon-left nav-prev-icon"></i>
+        <div>
+          <div class="nav-label">上一篇</div>
+          
+            <div class="nav-title">Java 靜態方法 </div>
+          
+        </div>
+      </a>
+    </div>
+  
+  
+    <div class="nav-item-next">
+      <a 
+        href="/2023/04/11/1%20%E7%A8%8B%E5%BC%8F%E5%9F%BA%E7%A4%8E/3%20%E5%BE%8C%E7%AB%AF%E8%AA%9E%E8%A8%80/1%20Java/1%20Java%20%E5%9F%BA%E7%A4%8E/2%20Java%20%E5%9F%BA%E6%9C%AC%E8%AA%9E%E6%B3%95/6%20Java%20%E6%96%B9%E6%B3%95/Java%20%E5%8F%AF%E8%AE%8A%E5%8F%83%E6%95%B8/" 
+        class="nav-link">
+        <div>
+          <div class="nav-label">下一篇</div>
+          
+            <div class="nav-title">Java 可變參數 </div>
+          
+        </div>
+        <i class="iconfont icon-right nav-next-icon"></i>
+      </a>
+    </div>
+  
+</div>
+
+<div 
+  class="card card-content toc-card" 
+  id="mobiletoc">
+  <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目錄
+</div>
+
+</div>
+            </main>
+            <aside class="right-column">
+              <div class="sticky-widescreen">
+  
+  
+    <article class="card card-content toc-card">
+      <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目錄
+</div>
+
+    </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header">
+    <i 
+      class="iconfont icon-wenzhang_huaban" 
+      style="padding-right: 2px;">
+    </i>最新文章
+  </div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-09-06</div>
+        <a href="/2023/09/06/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/%E6%95%B8%E6%93%9A%E5%BA%AB/ORM%E6%A1%86%E6%9E%B6/MyBatis/%E7%AD%86%E8%A8%98/MyBatis%20%E7%B5%90%E6%9E%9C%E9%9B%86%E7%9A%84%E6%98%A0%E5%B0%84/"><div class="recent-posts-item-content">MyBatis 結果集的映射</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-09-06</div>
+        <a href="/2023/09/06/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/%E6%95%B8%E6%93%9A%E5%BA%AB/ORM%E6%A1%86%E6%9E%B6/MyBatis/%E7%AD%86%E8%A8%98/MyBatis%20%E7%B7%A9%E5%AD%98/"><div class="recent-posts-item-content">MyBatis 緩存</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-09-05</div>
+        <a href="/2023/09/05/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/%E6%95%B8%E6%93%9A%E5%BA%AB/ORM%E6%A1%86%E6%9E%B6/MyBatis/%E7%AD%86%E8%A8%98/MyBatic%20%E5%88%86%E9%A0%81%E6%8F%92%E4%BB%B6/"><div class="recent-posts-item-content">MyBatic 分頁插件</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-09-05</div>
+        <a href="/2023/09/05/3%20%E6%87%89%E7%94%A8%E6%A1%86%E6%9E%B6/%E5%BE%8C%E7%AB%AF/%E6%95%B8%E6%93%9A%E5%BA%AB/ORM%E6%A1%86%E6%9E%B6/MyBatis/%E7%AD%86%E8%A8%98/MyBatis%20Genarator/"><div class="recent-posts-item-content">MyBatis Genarator</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+     
+    <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>
+          Copyright ©
+          
+            2020
+          
+          
+                - 
+                2023
+          
+        </span>
+        &nbsp;
+        <a 
+          href="/" 
+          class="footer-link">
+          Frederic的技術學習筆記
+        </a>
+      </div>
+    </div>
+
+    
+      <div class="footer-dsc">
+        
+          Powered by
+          <a 
+            href="https://hexo.io/" 
+            class="footer-link" 
+            target="_blank" 
+            rel="nofollow noopener noreferrer">
+            &nbsp;Hexo
+          </a>
+        
+        
+          <span>&nbsp;|&nbsp;</span>
+        
+        
+          Theme -
+          <a 
+            href="https://github.com/theme-kaze" 
+            class="footer-link" 
+            target="_blank"
+            rel="nofollow noopener noreferrer">
+            &nbsp;Kaze
+          </a>
+        
+      </div>
+    
+    
+    
+    
+</footer>
+ 
+    
+  <a 
+    role="button" 
+    id="scrollbutton" 
+    class="basebutton" 
+    aria-label="回到顶部">
+    <i class="iconfont icon-arrowleft button-icon"></i>
+  </a>
+
+<a 
+  role="button" 
+  id="menubutton"
+  aria-label="menu button"
+  class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="popbutton" 
+  class="basebutton" 
+  aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="darkbutton" 
+  class="basebutton darkwidget" 
+  aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="searchbutton" 
+  class="basebutton searchwidget" 
+  aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a> 
+     
+     
+     
+      <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img')
+    var i
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a')
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'))
+      wrapper.setAttribute('aria-label', 'illustration')
+      wrapper.style.cssText =
+        'width: 100%; display: flex; justify-content: center;'
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt
+      wrapper.dataset.nolink = true
+      img[i].before(wrapper)
+      wrapper.append(img[i])
+      var divWrap = document.createElement('div')
+      divWrap.classList.add('gallery')
+      wrapper.before(divWrap)
+      divWrap.append(wrapper)
+    }
+    baguetteBox.run('.gallery')
+  }
+</script>
+<script>
+  loadScript(
+    "/js/lib/lightbox/baguetteBox.min.js",
+    addImgLayout
+  )
+</script>
+ 
+     
+     
+    <script src="/js/main.js"></script> 
+     
+    
+      <script>
+        var addLazyload = function () {
+          var observer = lozad('.lozad', {
+            load: function (el) {
+              el.srcset = el.getAttribute('data-src')
+            },
+            loaded: function (el) {
+              el.classList.add('loaded')
+            },
+          })
+          observer.observe()
+        }
+      </script>
+      <script>
+        loadScript('/js/lib/lozad.min.js', addLazyload)
+      </script>
+    
+    <script src="//instant.page/5.1.0" type="module"
+      integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"></script>
+    
+    
+  </body>
+</html>
